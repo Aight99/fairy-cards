@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,6 +12,7 @@ public class Hand : MonoBehaviour
     [SerializeField] private float maxHandRadius = 100f;
     [SerializeField] private float moveSpeed = .5f;
     [SerializeField] private List<Transform> cards;
+    [SerializeField] private Transform hand;
 
     private List<Vector3> _cardPositions;
     private int _cardsInHand;
@@ -26,7 +28,7 @@ public class Hand : MonoBehaviour
         _cardsInHand = cards.Count;
         _cardsToDraw = _cardsInHand;
         SetCardPositions();
-        GetAllCardsFromDeck();
+        GetAllCardsFromDeck(_cardsInHand);
     }
 
     private void Update()
@@ -59,22 +61,24 @@ public class Hand : MonoBehaviour
         for (var i = 0; i < _cardsInHand; i++)
         {
             _cardPositions.Add(cardPosition);
-            cardPosition += new Vector3(positionStep, .1f, 0);
+            cardPosition += new Vector3(positionStep,0, 0);
+            cards[i].GetComponent<SpriteRenderer>().sortingOrder = i  ;
         }
     }
 
-    private void GetAllCardsFromDeck()
+    private void GetAllCardsFromDeck(int cardsToDraw)
     {
+        Debug.Log(cardsToDraw);
         var drawCardDuration = .3f;
         var sequence = DOTween.Sequence();
         // Поменять эту индексацию на метод AddCard()
-        sequence.Append(cards[_cardsToDraw - 1].transform.DOJump(_cardPositions[_cardsToDraw - 1], 20f, 1, drawCardDuration));
+        sequence.Append(cards[cardsToDraw - 1].transform.DOJump(_cardPositions[cardsToDraw - 1], 20f, 1, drawCardDuration));
         sequence.AppendCallback(() =>
             {
-                if (_cardsToDraw != 0)
+                if (cardsToDraw > 1)
                 {
-                    _cardsToDraw--;
-                    GetAllCardsFromDeck();
+                    
+                    GetAllCardsFromDeck(cardsToDraw - 1);
                 }
                 else
                 {

@@ -12,7 +12,9 @@ public class PlayerManager : MonoBehaviour
 
     private static PlayerManager instance;
 
-    private void Start()
+
+
+    private void Awake()
     {
         instance = this;
     }
@@ -36,19 +38,27 @@ public class PlayerManager : MonoBehaviour
                 if (CurrentSelectedAttack == null)
                     return;
 
-                GameManager.PlayerCard.AnimateAttack((sender as Card));
+                GameManager.PlayerCard.AnimateAttack((sender as Card) , () => { GameManager.ChangeState(States.EnemyAttack); });
                 (sender as Card).TakeDamage(CurrentSelectedAttack.Damage);
-                GameManager.ChangeState(States.EnemyAttack);
+                ManaManager.TakeMana(CurrentSelectedAttack.Cost);
+                GameManager.ChangeState(States.Waiting);
             };
         }
-
     }
 
 
 
     public void ChangeCurrentAttack(int index)
     {
-        CurrentSelectedAttack = GameManager.PlayerCard.Attacks[index];
+        if (GameManager.CurrentState != States.Idle)
+            return;
+
+        var newAttack = GameManager.PlayerCard.Attacks[index];
+
+        if (newAttack.Cost > ManaManager.CurrentManaValue)
+            return;
+
+        CurrentSelectedAttack = newAttack;
 
         GameManager.ChangeState(States.PlayerAttack);
     }

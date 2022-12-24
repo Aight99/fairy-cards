@@ -33,7 +33,7 @@ public class Card : MonoBehaviour
     public TextMeshPro healthPointText;
     public StatsInfo stats;
 
-    private int healthPoint;
+    private int healthPoints;
 
     private void Awake()
     {
@@ -44,7 +44,7 @@ public class Card : MonoBehaviour
 
 
         healthPointText.text = stats.healthPoints.ToString();
-        healthPoint = stats.healthPoints;
+        healthPoints = stats.healthPoints;
 
     }
 
@@ -68,7 +68,9 @@ public class Card : MonoBehaviour
         prevHitValue = isHit;
     }
 
-    public void AnimateAttack(Card target)
+    public delegate void onEndDelegate();
+
+    public void AnimateAttack(Card target , TweenCallback onEnd)
     {
 
         var seq = DOTween.Sequence();
@@ -78,15 +80,23 @@ public class Card : MonoBehaviour
         seq.Append(transform.DOMove(basePosition, 0.3f));
 
         seq.SetEase(Ease.Linear);
+        seq.onComplete += onEnd;
 
     }
 
     public void TakeDamage(int amount)
     {
-        healthPoint -= amount;
+        healthPoints -= amount;
 
-        if (healthPoint <= 0)
+        if (healthPoints <= 0)
+        {
             onDead?.Invoke(this, null);
+            Destroy(gameObject);
+        }
+
+        healthPointText.text = healthPoints.ToString();
+
+       
     }
   
 

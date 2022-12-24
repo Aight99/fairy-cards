@@ -285,13 +285,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1444e097b7056844fbba5a5f9edb8466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardType: 1
   _gardInfo: {fileID: 6165453052722989074}
+  cardType: 1
   Attacks:
   - {fileID: 11400000, guid: 1af7f32843d623c4f8168089caaa3d62, type: 2}
   - {fileID: 11400000, guid: a1753cb5481a64c46b6d87fc2b546924, type: 2}
   healthPointText: {fileID: 1392267876585347923}
-  stats: {fileID: 11400000, guid: e482734caf854fb498746fb0abb40f00, type: 2}
+  stats: {fileID: 11400000, guid: ad21e4449375d0144a7d81242b968dd1, type: 2}
 --- !u!1 &6165453052722989074
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6097375800172287744}
   - component: {fileID: 1336279288076498892}
+  - component: {fileID: 3367629833238569820}
+  - component: {fileID: 5044024332867479909}
   m_Layer: 0
   m_Name: Hand Card
   m_TagString: Untagged
@@ -84,3 +86,29 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &3367629833238569820
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7528789420526494425}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.362033, y: 7.3860154, z: 0.2}
+  m_Center: {x: 0.022221947, y: -0.706994, z: 0}
+--- !u!114 &5044024332867479909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7528789420526494425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e25ac01007a57f44bad2a17ab5cd906, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardData: {fileID: 0}

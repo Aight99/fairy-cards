@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -23,6 +24,11 @@ public enum CardTypes
 
 public class GameManager : MonoBehaviour
 {
+
+
+    public static EventHandler onLose;
+    public static EventHandler onWin;
+    public static EventHandler onTurnEnd;
 
     public static States CurrentState = States.Idle;
     public static Camera mainCamera;
@@ -70,16 +76,43 @@ public class GameManager : MonoBehaviour
         PlayerCard = Instantiate(PlayerCardPrefab, PlayerCardSpot.position, Quaternion.identity);
         PlayerCard.transform.SetParent(AllCardsSpot);
 
-        PlayerManager.Init();
 
+        PlayerCard.onCursorEnter += (object sender, EventArgs args) =>
+        {
+            (sender as Card)._gardInfo.SetActive(true);
+        };
+
+        PlayerCard.onCursorLeft += (object sender, EventArgs args) =>
+        {
+            (sender as Card)._gardInfo.SetActive(false);
+        };
+
+        PlayerCard.onDead += (object sender, EventArgs args) =>
+        {
+            onLose.Invoke(null, null);
+        };
+
+        //PlayerManager.Init();
+        //EnemyController.Init();
+        //ManaManager.Init();
     }
 
+
+
+    public static void DeleteEnemy(Card enemy)
+    {
+        EnemyCardsList.Remove(enemy);
+
+        if (EnemyCardsList.Count == 0)
+            onWin.Invoke(null, null) ;
+    }
 
     public static void ChangeState(States newState)
     {
         switch (newState)
         {
             case States.Idle:
+                onTurnEnd.Invoke(null, null) ;
                 break;
             case States.PlayerAttack:
                 break;
