@@ -23,6 +23,11 @@ public class Hand : MonoBehaviour
         _cardGap = deck.GetCardSize().x * deck.GetCardLocalScale().x * .6f;
         SetCardPositions(_startingCardCount);
         GetCardsFromDeck(_startingCardCount);
+        GameManager.onTurnEnd += (sender, args) =>
+        {
+          
+            GetCardsFromDeck(2);
+        };
     }
 
     private void DEBUG_Discard()
@@ -101,9 +106,13 @@ public class Hand : MonoBehaviour
 
     private void GetCardsFromDeck(int numberOfCards)
     {
+
+
         for (int i = 0; i < numberOfCards; i++)
         {
-            GetCardFromDeck();
+            if (_cards.Count == _maxCardsInHand)
+                break;
+             GetCardFromDeck();
         }
     }
 
@@ -112,6 +121,26 @@ public class Hand : MonoBehaviour
         var card = deck.DrawCard();
         _cards.Add(card);
         UpdateCardPositions();
+        card.onPlay += (sender, args) =>
+        {
+            int index = _cards.IndexOf((sender as HandCard));
+            UseCard(index);
+
+            //deck.DiscardCard((sender as HandCard));
+            //var cardTransform = (sender as HandCard).transform;
+            //cardTransform.DOMove(cardTransform.up * 30, moveSpeed).OnComplete(() =>
+            //{
+            //    // TODO Иногда запускается после SetActive(true),
+            //    // в колоде появляется пустая выключенная карта
+            //    cardTransform.gameObject.SetActive(false);
+            //});
+            //_cards.Remove((sender as HandCard));
+            //SetCardPositions(_cards.Count);
+            //for (int i = 0; i < _cards.Count; i++)
+            //{
+            //    _cards[i].transform.DOMove(_cardPositions[i], moveSpeed);
+            //}
+        };
     }
 
 

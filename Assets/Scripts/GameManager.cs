@@ -92,12 +92,16 @@ public class GameManager : MonoBehaviour
             onLose.Invoke(null, null);
         };
 
-        //PlayerManager.Init();
-        //EnemyController.Init();
-        //ManaManager.Init();
+        PlayerManager.Init();
+        EnemyController.Init();
+        ManaManager.Init();
     }
 
 
+    private void Update()
+    {
+
+    }
 
     public static void DeleteEnemy(Card enemy)
     {

@@ -46,10 +46,6 @@ public class HandCard : MonoBehaviour
              _spriteRenderer.sortingOrder = _cardSortingLayer;
         };
 
-        onPlay += (sender, args) =>
-        {
-            Debug.Log("Card play");
-        };
 
     }
 
@@ -75,11 +71,7 @@ public class HandCard : MonoBehaviour
 
 
         }).ToArray();
-        bool isFirstInPile = hits.Length > 0 && hits[^1].collider == _boxCollider;
-        
-        Debug.Log(hits.Length);
-
-       
+        bool isFirstInPile = hits.Length > 0 && hits[^1].collider == _boxCollider;   
 
        
 
@@ -90,7 +82,7 @@ public class HandCard : MonoBehaviour
             onCursorEnter?.Invoke(this, null);
 
 
-        if (isHit && isClick && isFirstInPile)
+        if ( isClick && isFirstInPile)
             onPlay?.Invoke(this, null);
 
         _prevHitValue = isFirstInPile;
