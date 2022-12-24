@@ -13,6 +13,13 @@ public enum States
 
 }
 
+public enum CardTypes
+{
+    EnemyCard ,
+    PlayerCard,
+    HandCard
+}
+
 public class GameManager : MonoBehaviour
 {
 

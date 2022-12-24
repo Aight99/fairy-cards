@@ -7,7 +7,10 @@ public class Card : MonoBehaviour
 {
 
     private BoxCollider _meshCollider;
-    
+
+    [SerializeField]
+    private CardTypes cardType;
+
     [SerializeField]
     private GameObject _gardInfo;
 
@@ -23,7 +26,6 @@ public class Card : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (!Input.GetMouseButtonDown(0))
             return;
 
@@ -34,19 +36,30 @@ public class Card : MonoBehaviour
             _gardInfo.SetActive(false);
             return;
         }
+        _gardInfo.SetActive(true);
+
+
 
         switch (GameManager.CurrentState)
         {
             case States.Idle:
-                _gardInfo.SetActive(true);
                 break;
+
             case States.PlayerAttack:
+
+                if (cardType == CardTypes.PlayerCard)
+                    break;
+
+                _gardInfo.SetActive(false);
                 Debug.Log($"Card Was Attack by {GameManager.CurrentSelectedAttack.Name}");
 
 
-                GameManager.ChangeState(States.Idle);
+                GameManager.ChangeState(States.EnemyAttack);
                 break;
             case States.EnemyAttack:
+
+
+
                 break;
             default:
                 break;

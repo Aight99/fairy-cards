@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1444e097b7056844fbba5a5f9edb8466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardType: 1
   _gardInfo: {fileID: 6165453052722989074}
   Attacks:
   - {fileID: 11400000, guid: 1af7f32843d623c4f8168089caaa3d62, type: 2}
