@@ -353,7 +353,7 @@ MonoBehaviour:
   - {fileID: 6165453052047450781, guid: c3f86e9881d06c64194596df1dd44cbe, type: 3}
   - {fileID: 6165453052047450781, guid: eb64ea1f6679ebb4da373e7355264690, type: 3}
   PlayerCardSpot: {fileID: 1555998949}
-  PlayerCardPrefab: {fileID: 6165453052047450781, guid: 1da623b27d2054949a6444c6a2184ea9, type: 3}
+  PlayerCardPrefab: {fileID: 6165453052047450781, guid: b681f23b4dc35c1419e1db29868fc9c1, type: 3}
   PlayerAttacksButton:
   - {fileID: 1421173444}
   - {fileID: 862420554}
@@ -434,7 +434,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 862420555}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 739293144}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: ChangeCurrentAttack
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &862420555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -691,7 +703,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1421173445}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 739293144}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: ChangeCurrentAttack
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1421173445
 MonoBehaviour:
   m_ObjectHideFlags: 0

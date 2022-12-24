@@ -15,5 +15,5 @@ MonoBehaviour:
   Damage: 0
   Cost: 0
   spriteImage: {fileID: 0}
-  Name: 
+  Name: EnemyAttack 2
   Description: 

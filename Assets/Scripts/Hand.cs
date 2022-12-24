@@ -29,7 +29,7 @@ public class Hand : MonoBehaviour
         _moveCooldown -= Time.deltaTime;
         if (_moveCooldown > 0)
         {
-            // return;
+            return;
         }
         if (Input.GetKey(KeyCode.Space))
         {
