@@ -32,23 +32,19 @@ public class GameManager : MonoBehaviour
     public Transform[] EnemyCardsSpots;
     public Card[] EnemyCardsPrefab;
 
-    private List<Card> EnemyCardsList;
-
+    public static List<Card> EnemyCardsList;
 
     public Transform PlayerCardSpot;
     public Card PlayerCardPrefab;
-    public Button[] PlayerAttacksButton;
-    public static Card PlayerCard { get => Instanse._playerCard; set => Instanse._playerCard = value; }
-    private Card _playerCard;
-    public static Attack CurrentSelectedAttack = null;
+    
+    
+    public static Card PlayerCard;
 
-    private static GameManager Instanse;
-
+    
     void Start()
     {
         EnemyCardsList = new List<Card>();
 
-        Instanse = this;
         mainCamera = Camera.main;
 
         foreach (var spot in EnemyCardsSpots)
@@ -57,33 +53,39 @@ public class GameManager : MonoBehaviour
             randomEnmeyCard = Instantiate(randomEnmeyCard, spot.position, Quaternion.identity);
             randomEnmeyCard.transform.SetParent(AllCardsSpot);
             EnemyCardsList.Add(randomEnmeyCard);
+
+            randomEnmeyCard.onCursorEnter += (object sender, EventArgs args) =>
+            {
+                (sender as Card)._gardInfo.SetActive(true);
+            };
+            
+            randomEnmeyCard.onCursorLeft += (object sender, EventArgs args) =>
+            {
+                (sender as Card)._gardInfo.SetActive(false);
+            };
+
+
         }
 
-        _playerCard = Instantiate(PlayerCardPrefab, PlayerCardSpot.position, Quaternion.identity);
-        _playerCard.transform.SetParent(AllCardsSpot);
+        PlayerCard = Instantiate(PlayerCardPrefab, PlayerCardSpot.position, Quaternion.identity);
+        PlayerCard.transform.SetParent(AllCardsSpot);
 
-
-        for (int i = 0; i < _playerCard.Attacks.Length; i++)
-        {
-            var attackInfo = _playerCard.Attacks[i];
-            PlayerAttacksButton[i].GetComponent<Image>().sprite = attackInfo.spriteImage;
-
-        }
+        PlayerManager.Init();
 
     }
 
+
     public static void ChangeState(States newState)
     {
-
         switch (newState)
         {
             case States.Idle:
-                CurrentSelectedAttack = null;
-
                 break;
             case States.PlayerAttack:
                 break;
             case States.EnemyAttack:
+                break;
+            case States.Waiting:
                 break;
             default:
                 break;
@@ -93,33 +95,4 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void ChangeCurrentAttack(int index)
-    {
-        CurrentSelectedAttack = _playerCard.Attacks[index];
-
-        ChangeState(States.PlayerAttack);
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        switch (CurrentState)
-        {
-            case States.Idle:
-                break;
-            case States.PlayerAttack:
-                break;
-            case States.EnemyAttack:
-                EnemyCardsList[Random.Range(0, EnemyCardsList.Count)].Attack();
-                break;
-            case States.Waiting:
-                break;
-            default:
-                break;
-        }
-
-
-
-    }
 }
