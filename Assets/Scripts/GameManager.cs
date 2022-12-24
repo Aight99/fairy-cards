@@ -103,6 +103,11 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void EndPlayerTurn()
+    {
+        ChangeState(States.EnemyAttack);
+    }
+
     public static void DeleteEnemy(Card enemy)
     {
         EnemyCardsList.Remove(enemy);

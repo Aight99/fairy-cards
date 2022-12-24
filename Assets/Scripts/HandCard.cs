@@ -1,11 +1,13 @@
 using System;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class HandCard : MonoBehaviour
 {
     [SerializeField] private HandCardData cardData;
+    [SerializeField] private TextMeshPro manaCost;
 
     public EventHandler onCursorEnter;
     public EventHandler onCursorLeft;
@@ -46,6 +48,7 @@ public class HandCard : MonoBehaviour
              _spriteRenderer.sortingOrder = _cardSortingLayer;
         };
 
+        manaCost.text = cardData.manaValue.ToString();
 
     }
 
@@ -82,9 +85,11 @@ public class HandCard : MonoBehaviour
             onCursorEnter?.Invoke(this, null);
 
 
-        if ( isClick && isFirstInPile)
+        if (isClick && isFirstInPile && cardData.manaValue <= ManaManager.CurrentManaValue)
+        {
+            ManaManager.TakeMana(cardData.manaValue);
             onPlay?.Invoke(this, null);
-
+        }
         _prevHitValue = isFirstInPile;
     }
 
