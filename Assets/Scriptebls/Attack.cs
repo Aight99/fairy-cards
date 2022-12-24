@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Attack", menuName ="ScriptebleObject/Attack", order =1)]
+[CreateAssetMenu(fileName = "Attack", menuName ="ScriptableObject/Attack", order =1)]
 public class Attack : ScriptableObject
 {
 

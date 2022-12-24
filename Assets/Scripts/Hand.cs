@@ -8,20 +8,25 @@ using UnityEngine.InputSystem;
 public class Hand : MonoBehaviour
 {
     [SerializeField] private Transform handBase;
-    [SerializeField] private float handRadius = 100f;
-    [SerializeField] private int numberOfCards = 5;
-    [SerializeField] private Transform card;
+    [SerializeField] private float maxHandRadius = 100f;
     [SerializeField] private float moveSpeed = .5f;
+    [SerializeField] private List<Transform> cards;
 
     private List<Vector3> _cardPositions;
+    private int _cardsInHand;
     private int _currentCardIndex = 0;
     private float _moveCooldown = 0;
+    private bool _isInteractive = false;
+    private int _cardsToDraw;
+    private float _cardGap;
 
     private void Awake()
     {
-        Debug.Log($"Base: {handBase.position.x}");
+        _cardGap = cards[0].GetComponent<SpriteRenderer>().size.x * .6f * cards[0].transform.localScale.x;
+        _cardsInHand = cards.Count;
+        _cardsToDraw = _cardsInHand;
         SetCardPositions();
-        card.DOMove(_cardPositions[_currentCardIndex], moveSpeed);
+        GetAllCardsFromDeck();
     }
 
     private void Update()
@@ -35,43 +40,52 @@ public class Hand : MonoBehaviour
         {
             MoveCardToNextPlace();
         }
-        if (Input.GetKey(KeyCode.A))
-        {
-            numberOfCards--;
-            SetCardPositions();
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            numberOfCards++;
-            SetCardPositions();
-        }
         _moveCooldown = .5f;
-    }
-
-    private void OnValidate()
-    {
-        _currentCardIndex = 0;
-        SetCardPositions();
-        card.DOMove(_cardPositions[_currentCardIndex], moveSpeed);
     }
 
     private void MoveCardToNextPlace()
     {
-        _currentCardIndex = (_currentCardIndex + 1) % numberOfCards;
-        card.DOMove(_cardPositions[_currentCardIndex], moveSpeed);
+        _currentCardIndex = (_currentCardIndex + 1) % _cardsInHand;
     }
 
     private void SetCardPositions()
     {
-        float handLenght = handRadius * 2;
-        float positionStep = handLenght / numberOfCards;
-        _cardPositions = new List<Vector3>(numberOfCards);
-        Vector3 cardPosition = handBase.position + new Vector3(-handRadius, 0, 0);
-        for (int i = 0; i < numberOfCards; i++)
+        var gapHandRadius = _cardGap * (_cardsInHand - 1);
+        var handRadius = (gapHandRadius <= maxHandRadius)? gapHandRadius : maxHandRadius;
+        var handLenght = handRadius * 2;
+        var positionStep = handLenght / (_cardsInHand - 1);
+        _cardPositions = new List<Vector3>(_cardsInHand);
+        var cardPosition = handBase.position + new Vector3(-handRadius, 0, 0);
+        for (var i = 0; i < _cardsInHand; i++)
         {
             _cardPositions.Add(cardPosition);
-            cardPosition += new Vector3(positionStep, 0, 0);
+            cardPosition += new Vector3(positionStep, .1f, 0);
         }
-        Debug.Log($"First: {_cardPositions[0].x}, Second: {_cardPositions[^1].x}");
+    }
+
+    private void GetAllCardsFromDeck()
+    {
+        var drawCardDuration = .3f;
+        var sequence = DOTween.Sequence();
+        // Поменять эту индексацию на метод AddCard()
+        sequence.Append(cards[_cardsToDraw - 1].transform.DOJump(_cardPositions[_cardsToDraw - 1], 20f, 1, drawCardDuration));
+        sequence.AppendCallback(() =>
+            {
+                if (_cardsToDraw != 0)
+                {
+                    _cardsToDraw--;
+                    GetAllCardsFromDeck();
+                }
+                else
+                {
+                    _isInteractive = true;
+                    Debug.Log("Done");
+                }
+            });
+    }
+
+    private void GetCardFromDeck()
+    {
+        
     }
 }
