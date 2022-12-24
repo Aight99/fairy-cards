@@ -7,8 +7,11 @@ public class Card : MonoBehaviour
 {
 
     private BoxCollider _meshCollider;
+    
     [SerializeField]
     private GameObject _gardInfo;
+
+    public Attack[] Attacks;
 
 
     // Start is called before the first frame update
@@ -38,6 +41,10 @@ public class Card : MonoBehaviour
                 _gardInfo.SetActive(true);
                 break;
             case States.PlayerAttack:
+                Debug.Log($"Card Was Attack by {GameManager.CurrentSelectedAttack.Name}");
+
+
+                GameManager.ChangeState(States.Idle);
                 break;
             case States.EnemyAttack:
                 break;
@@ -47,9 +54,5 @@ public class Card : MonoBehaviour
 
     }
 
-    void ShowCardInfo()
-    {
-
-    }
 
 }

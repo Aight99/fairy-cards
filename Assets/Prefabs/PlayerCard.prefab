@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6165453052047450782}
   - component: {fileID: 6165453052047450781}
   m_Layer: 0
-  m_Name: Basic_Card
+  m_Name: PlayerCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -113,7 +113,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gardInfo: {fileID: 6165453052722989074}
-  Attacks: []
+  Attacks:
+  - {fileID: 11400000, guid: 1af7f32843d623c4f8168089caaa3d62, type: 2}
+  - {fileID: 11400000, guid: a1753cb5481a64c46b6d87fc2b546924, type: 2}
 --- !u!1 &6165453052722989074
 GameObject:
   m_ObjectHideFlags: 0
