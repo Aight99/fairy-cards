@@ -21,7 +21,7 @@ public class Deck : MonoBehaviour
         _cards = _cards.OrderBy(i => Random.value).ToList();
         foreach (var card in _cards)
         {
-            card.GetComponent<SpriteRenderer>().sortingOrder = _currentSortingLayer;
+            card.SetSortingLayer(_currentSortingLayer);
             _currentSortingLayer++;
         }
     }

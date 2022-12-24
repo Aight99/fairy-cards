@@ -16,14 +16,17 @@ public class HandCard : MonoBehaviour
     private int _cardSortingLayer;
     private bool _prevHitValue;
 
+    private void OnEnable()
+    {
+        _cardSortingLayer = _spriteRenderer.sortingOrder;
+    }
+
     private void Awake()
     {
         var scaleFactor = 1.3f;
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _boxCollider = GetComponent<BoxCollider>();
 
-        _cardSortingLayer = _spriteRenderer.sortingOrder;
-        
         _spriteRenderer.color = Random.ColorHSV();
 
 
@@ -69,4 +72,9 @@ public class HandCard : MonoBehaviour
         _prevHitValue = isHit;
     }
 
+    public void SetSortingLayer(int layerNumber)
+    {
+        _spriteRenderer.sortingOrder = layerNumber;
+        _cardSortingLayer = layerNumber;
+    }
 }
