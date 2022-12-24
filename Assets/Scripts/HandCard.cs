@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -38,11 +39,11 @@ public class HandCard : MonoBehaviour
             (sender as HandCard).transform.localScale *= scaleFactor;
             _spriteRenderer.sortingOrder = 500;
         };
-        
+
         onCursorLeft += (sender, args) =>
         {
             (sender as HandCard).transform.localScale /= scaleFactor;
-            _spriteRenderer.sortingOrder = _cardSortingLayer;
+             _spriteRenderer.sortingOrder = _cardSortingLayer;
         };
 
         onPlay += (sender, args) =>
@@ -55,21 +56,44 @@ public class HandCard : MonoBehaviour
     private void Update()
     {
         bool isClick = Input.GetMouseButtonDown(0);
-       
+
         Ray ray = GameManager.mainCamera.ScreenPointToRay(Input.mousePosition);
 
         bool isHit = _boxCollider.Raycast(ray, out RaycastHit hitInfo, 1000);
 
-        if (_prevHitValue && !isHit)
+        var hits = Physics.RaycastAll(ray, 1000);
+
+
+        hits = hits.OrderBy(hit =>
+        {
+            var sp = hit.collider.GetComponent<SpriteRenderer>();
+
+            if (sp == null)
+                return -1;
+
+            return sp.sortingOrder;
+
+
+        }).ToArray();
+        bool isFirstInPile = hits.Length > 0 && hits[^1].collider == _boxCollider;
+        
+        Debug.Log(hits.Length);
+
+       
+
+       
+
+        if (_prevHitValue && !isFirstInPile)
             onCursorLeft?.Invoke(this, null);
 
-        if (!_prevHitValue && isHit)
+        if (!_prevHitValue  && isFirstInPile)
             onCursorEnter?.Invoke(this, null);
 
-        if (isHit && isClick)
+
+        if (isHit && isClick && isFirstInPile)
             onPlay?.Invoke(this, null);
 
-        _prevHitValue = isHit;
+        _prevHitValue = isFirstInPile;
     }
 
     public void SetSortingLayer(int layerNumber)
