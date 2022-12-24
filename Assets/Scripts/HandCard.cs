@@ -12,24 +12,34 @@ public class HandCard : MonoBehaviour
 
 
     private BoxCollider _boxCollider;
-    private bool prevHitValue;
+    private SpriteRenderer _spriteRenderer;
+    private int _cardSortingLayer;
+    private bool _prevHitValue;
 
-    private void Start()
+    private void Awake()
     {
-        GetComponent<SpriteRenderer>().color = Random.ColorHSV();
+        var scaleFactor = 1.3f;
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         _boxCollider = GetComponent<BoxCollider>();
 
+        _cardSortingLayer = _spriteRenderer.sortingOrder;
+        
+        _spriteRenderer.color = Random.ColorHSV();
+
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        prevHitValue = _boxCollider.Raycast(ray, out RaycastHit hitInfo, 1000);
+        _prevHitValue = _boxCollider.Raycast(ray, out RaycastHit hitInfo, 1000);
 
         onCursorEnter += (sender, args) =>
         {
-            (sender as HandCard).transform.localScale += new Vector3(0.3f, 0.3f, 0);
+            (sender as HandCard).transform.localScale *= scaleFactor;
+            _spriteRenderer.sortingOrder = 500;
         };
         
         onCursorLeft += (sender, args) =>
         {
-            (sender as HandCard).transform.localScale -= new Vector3(0.3f, 0.3f, 0);
+            (sender as HandCard).transform.localScale /= scaleFactor;
+            _spriteRenderer.sortingOrder = _cardSortingLayer;
         };
 
         onPlay += (sender, args) =>
@@ -47,16 +57,16 @@ public class HandCard : MonoBehaviour
 
         bool isHit = _boxCollider.Raycast(ray, out RaycastHit hitInfo, 1000);
 
-        if (prevHitValue && !isHit)
+        if (_prevHitValue && !isHit)
             onCursorLeft?.Invoke(this, null);
 
-        if (!prevHitValue && isHit)
+        if (!_prevHitValue && isHit)
             onCursorEnter?.Invoke(this, null);
 
         if (isHit && isClick)
             onPlay?.Invoke(this, null);
 
-        prevHitValue = isHit;
+        _prevHitValue = isHit;
     }
 
 }

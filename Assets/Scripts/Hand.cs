@@ -7,7 +7,7 @@ public class Hand : MonoBehaviour
 {
     [SerializeField] private Transform handBase;
     [SerializeField] private float maxHandRadius = 100f;
-    [SerializeField] private float moveSpeed = .5f;
+    [SerializeField] private float moveSpeed = .3f;
     [SerializeField] private Deck deck;
     [SerializeField] private int _startingCardCount = 5;
     [SerializeField] private int _maxCardsInHand = 10;
@@ -22,11 +22,20 @@ public class Hand : MonoBehaviour
     {
         _cardGap = deck.GetCardSize().x * deck.GetCardLocalScale().x * .6f;
         SetCardPositions(_startingCardCount);
-        GetCardsFromDeck(2);
+        GetCardsFromDeck(_startingCardCount);
+    }
+
+    private void DEBUG_Discard()
+    {
+        UseCard(0);
     }
 
     private void Update()
     {
+        if (Input.GetKey(KeyCode.R) && _cards.Count == 0)
+        {
+            GetCardsFromDeck(5);
+        }
         _moveCooldown -= Time.deltaTime;
         if (_moveCooldown > 0)
         {
@@ -34,14 +43,27 @@ public class Hand : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.Space))
         {
-            MoveCardToNextPlace();
+            DEBUG_Discard();
         }
-        _moveCooldown = .5f;
+        _moveCooldown = 1f;
     }
 
-    private void MoveCardToNextPlace()
+    private void UseCard(int cardIndex)
     {
-        _currentCardIndex = (_currentCardIndex + 1) % _cards.Count;
+        deck.DiscardCard(_cards[cardIndex]);
+        var cardTransform = _cards[cardIndex].transform;
+        cardTransform.DOMove(cardTransform.up * 30, moveSpeed).OnComplete(() =>
+        {
+            // TODO Иногда запускается после SetActive(true),
+            // в колоде появляется пустая выключенная карта
+            cardTransform.gameObject.SetActive(false);
+        });
+        _cards.RemoveAt(cardIndex);
+        SetCardPositions(_cards.Count);
+        for (int i = 0; i < _cards.Count; i++)
+        {
+            _cards[i].transform.DOMove(_cardPositions[i], moveSpeed);
+        }
     }
 
     private void SetCardPositions(int cardCount)
@@ -58,20 +80,37 @@ public class Hand : MonoBehaviour
             cardPosition -= new Vector3(positionStep, 0, 0);
         }
     }
+    
+    private void UpdateCardPositions()
+    {
+        var count = _cards.Count;
+        var gapHandRadius = _cardGap * (count - 1);
+        var handRadius = (gapHandRadius <= maxHandRadius)? gapHandRadius : maxHandRadius;
+        var handLenght = handRadius * 2;
+        var positionStep = handLenght / (count - 1);
+        _cardPositions = new List<Vector3>(count);
+        var cardPosition = handBase.position + new Vector3(handRadius, 0, 0);
+        for (var i = 0; i < count; i++)
+        {
+            _cardPositions.Add(cardPosition);
+            var targetPosition = cardPosition;
+            _cards[i].transform.DOMove(targetPosition, moveSpeed);
+            cardPosition -= new Vector3(positionStep, 0, 0);
+        }
+    }
 
     private void GetCardsFromDeck(int numberOfCards)
     {
-        var drawCardDuration = .3f;
-        var sequence = DOTween.Sequence();
-        
-        for (int i = _cardPositions.Count - numberOfCards; i < _cardPositions.Count; i++)
+        for (int i = 0; i < numberOfCards; i++)
         {
-            var card = deck.DrawCard();
-            _cards.Add(card);
-            var targetPosition = _cardPositions[i];
-            sequence.Append(card.transform.DOJump(targetPosition, 20f, 1, drawCardDuration));
-            sequence.AppendInterval(drawCardDuration);
+            GetCardFromDeck();
         }
-        sequence.AppendCallback(() => Debug.Log("Всё!"));
+    }
+
+    private void GetCardFromDeck()
+    {
+        var card = deck.DrawCard();
+        _cards.Add(card);
+        UpdateCardPositions();
     }
 }

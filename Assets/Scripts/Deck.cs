@@ -25,6 +25,18 @@ public class Deck : MonoBehaviour
             _currentSortingLayer++;
         }
     }
+    
+    private void RefillDeck()
+    {
+        foreach (var card in _discard)
+        {
+            card.gameObject.SetActive(true);
+            card.transform.localPosition = Vector3.zero;
+        }
+        _cards.AddRange(_discard);
+        _discard.Clear();
+        Shuffle();
+    }
 
     public Vector2 GetCardSize() => _cards[0].GetComponent<SpriteRenderer>().size;
 
@@ -34,15 +46,17 @@ public class Deck : MonoBehaviour
     {
         var card = _cards[0];
         _cards.RemoveAt(0);
+        Debug.Log($"In deck {_cards.Count} cards, but {_discard.Count} in discard");
         if (_cards.Count == 0)
         {
-            _cards.AddRange(_discard);
+            RefillDeck();
+            Debug.Log($" Refresh!!! {_cards.Count} in deck  cards, {_discard.Count} in discard");
         }
         return card;
     }
 
     public void DiscardCard(HandCard card)
     {
-        // Disable and add to discard deck
+        _discard.Add(card);
     }
 }
