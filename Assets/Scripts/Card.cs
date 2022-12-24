@@ -17,14 +17,12 @@ public class Card : MonoBehaviour
     public Attack[] Attacks;
 
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         _meshCollider = GetComponent<BoxCollider>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (!Input.GetMouseButtonDown(0))
             return;
