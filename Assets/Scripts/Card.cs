@@ -6,15 +6,15 @@ using UnityEngine.EventSystems;
 public class Card : MonoBehaviour
 {
 
-    private MeshCollider _meshCollider;
-    private Plane _plane;
+    private BoxCollider _meshCollider;
+    [SerializeField]
+    private GameObject _gardInfo;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        _meshCollider = GetComponent<MeshCollider>();
-
+        _meshCollider = GetComponent<BoxCollider>();
     }
 
     // Update is called once per frame
@@ -27,13 +27,15 @@ public class Card : MonoBehaviour
         Ray ray = GameManager.mainCamera.ScreenPointToRay(Input.mousePosition);
 
         if (!_meshCollider.Raycast(ray, out RaycastHit hitInfo, 1000))
+        {
+            _gardInfo.SetActive(false);
             return;
-
-
+        }
 
         switch (GameManager.CurrentState)
         {
             case States.Idle:
+                _gardInfo.SetActive(true);
                 break;
             case States.PlayerAttack:
                 break;
