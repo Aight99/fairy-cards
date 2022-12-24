@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DG.Tweening;
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,24 +8,21 @@ public class Hand : MonoBehaviour
     [SerializeField] private Transform handBase;
     [SerializeField] private float maxHandRadius = 100f;
     [SerializeField] private float moveSpeed = .5f;
-    [SerializeField] private List<Transform> cards;
-    [SerializeField] private Transform hand;
+    [SerializeField] private Deck deck;
+    [SerializeField] private int _startingCardCount = 5;
+    [SerializeField] private int _maxCardsInHand = 10;
 
     private List<Vector3> _cardPositions;
-    private int _cardsInHand;
+    private List<HandCard> _cards = new ();
     private int _currentCardIndex = 0;
     private float _moveCooldown = 0;
-    private bool _isInteractive = false;
-    private int _cardsToDraw;
     private float _cardGap;
 
     private void Awake()
     {
-        _cardGap = cards[0].GetComponent<SpriteRenderer>().size.x * .6f * cards[0].transform.localScale.x;
-        _cardsInHand = cards.Count;
-        _cardsToDraw = _cardsInHand;
-        SetCardPositions();
-        GetAllCardsFromDeck(_cardsInHand);
+        _cardGap = deck.GetCardSize().x * deck.GetCardLocalScale().x * .6f;
+        SetCardPositions(_startingCardCount);
+        GetCardsFromDeck(2);
     }
 
     private void Update()
@@ -47,49 +41,37 @@ public class Hand : MonoBehaviour
 
     private void MoveCardToNextPlace()
     {
-        _currentCardIndex = (_currentCardIndex + 1) % _cardsInHand;
+        _currentCardIndex = (_currentCardIndex + 1) % _cards.Count;
     }
 
-    private void SetCardPositions()
+    private void SetCardPositions(int cardCount)
     {
-        var gapHandRadius = _cardGap * (_cardsInHand - 1);
+        var gapHandRadius = _cardGap * (cardCount - 1);
         var handRadius = (gapHandRadius <= maxHandRadius)? gapHandRadius : maxHandRadius;
         var handLenght = handRadius * 2;
-        var positionStep = handLenght / (_cardsInHand - 1);
-        _cardPositions = new List<Vector3>(_cardsInHand);
-        var cardPosition = handBase.position + new Vector3(-handRadius, 0, 0);
-        for (var i = 0; i < _cardsInHand; i++)
+        var positionStep = handLenght / (cardCount - 1);
+        _cardPositions = new List<Vector3>(cardCount);
+        var cardPosition = handBase.position + new Vector3(handRadius, 0, 0);
+        for (var i = 0; i < cardCount; i++)
         {
             _cardPositions.Add(cardPosition);
-            cardPosition += new Vector3(positionStep,0, 0);
-            cards[i].GetComponent<SpriteRenderer>().sortingOrder = i  ;
+            cardPosition -= new Vector3(positionStep, 0, 0);
         }
     }
 
-    private void GetAllCardsFromDeck(int cardsToDraw)
+    private void GetCardsFromDeck(int numberOfCards)
     {
-        Debug.Log(cardsToDraw);
         var drawCardDuration = .3f;
         var sequence = DOTween.Sequence();
-        // Поменять эту индексацию на метод AddCard()
-        sequence.Append(cards[cardsToDraw - 1].transform.DOJump(_cardPositions[cardsToDraw - 1], 20f, 1, drawCardDuration));
-        sequence.AppendCallback(() =>
-            {
-                if (cardsToDraw > 1)
-                {
-                    
-                    GetAllCardsFromDeck(cardsToDraw - 1);
-                }
-                else
-                {
-                    _isInteractive = true;
-                    Debug.Log("Done");
-                }
-            });
-    }
-
-    private void GetCardFromDeck()
-    {
         
+        for (int i = _cardPositions.Count - numberOfCards; i < _cardPositions.Count; i++)
+        {
+            var card = deck.DrawCard();
+            _cards.Add(card);
+            var targetPosition = _cardPositions[i];
+            sequence.Append(card.transform.DOJump(targetPosition, 20f, 1, drawCardDuration));
+            sequence.AppendInterval(drawCardDuration);
+        }
+        sequence.AppendCallback(() => Debug.Log("Всё!"));
     }
 }
