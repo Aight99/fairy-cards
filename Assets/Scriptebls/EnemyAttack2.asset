@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 922f81faefc199740a0ca392a42109d4, type: 3}
   m_Name: EnemyAttack2
   m_EditorClassIdentifier: 
-  Damage: 0
+  Damage: 1
   Cost: 0
   spriteImage: {fileID: 0}
   Name: EnemyAttack 2
