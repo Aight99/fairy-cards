@@ -113,4 +113,13 @@ public class Hand : MonoBehaviour
         _cards.Add(card);
         UpdateCardPositions();
     }
+
+
+    private void OnDrawGizmosSelected()
+    {
+
+        Gizmos.DrawWireCube(handBase.position, new Vector3(maxHandRadius * 2, 20));
+
+    }
+
 }
