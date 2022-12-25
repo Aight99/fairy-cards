@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class Hand : MonoBehaviour
 {
+    public static Hand inctance = null;
+    
     [SerializeField] private Transform handBase;
     [SerializeField] private float maxHandRadius = 100f;
     [SerializeField] private float moveSpeed = .3f;
@@ -20,6 +22,11 @@ public class Hand : MonoBehaviour
 
     private void Start()
     {
+        if (inctance == null)
+        {
+            inctance = this;
+        }
+        
         _cardGap = deck.GetCardSize().x * deck.GetCardLocalScale().x * .6f;
         SetCardPositions(_startingCardCount);
         GetCardsFromDeck(_startingCardCount);
