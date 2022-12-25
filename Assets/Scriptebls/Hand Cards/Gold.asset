@@ -24,4 +24,4 @@ MonoBehaviour:
   targetType: 2
   manaCost: 0
   cardsGain: 0
-  manaGain: 2
+  manaGain: 1

@@ -47,8 +47,8 @@ public class HandCardData : ScriptableObject
             targetCard.TakeDamage(effectPower * (int)effectType);
         }
         
-        // Add Mana 
-        // Add Cards
+        ManaManager.GiveMana(manaGain);
+        
     }
 
     private void HandleSpecialUsers()
