@@ -40,15 +40,22 @@ public class HandCard : MonoBehaviour
         {
             (sender as HandCard).transform.localScale *= scaleFactor;
             _spriteRenderer.sortingOrder = 500;
+            manaCost.gameObject.SetActive(true);
         };
 
         onCursorLeft += (sender, args) =>
         {
             (sender as HandCard).transform.localScale /= scaleFactor;
              _spriteRenderer.sortingOrder = _cardSortingLayer;
+            manaCost.gameObject.SetActive(false);
         };
 
         manaCost.text = cardData.manaCost.ToString();
+
+        onPlay += (sender, args) =>
+        {
+            cardData.ApplyEffect();
+        };
 
     }
 

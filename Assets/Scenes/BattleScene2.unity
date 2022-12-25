@@ -798,10 +798,7 @@ MonoBehaviour:
   EnemyCardsPrefab:
   - {fileID: 6165453052047450781, guid: 546fce8bdbf7a0a4cbbc337b04f64303, type: 3}
   PlayerCardSpot: {fileID: 1555998949}
-  PlayerCardPrefabs:
-  - {fileID: 6165453052047450781, guid: 4817526051ba00b42b1a90f3f3969b22, type: 3}
-  - {fileID: 6165453052047450781, guid: 546fce8bdbf7a0a4cbbc337b04f64303, type: 3}
-  - {fileID: 6165453052047450781, guid: 4817526051ba00b42b1a90f3f3969b22, type: 3}
+  PlayerCardPrefab: {fileID: 6165453052047450781, guid: 4817526051ba00b42b1a90f3f3969b22, type: 3}
   UIOverlay: {fileID: 1828997064}
   AfterBattleScreen: {fileID: 1010220934}
   HandandDeck: {fileID: 153513590}
@@ -942,7 +939,7 @@ RectTransform:
   m_GameObject: {fileID: 862420553}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1828997065}
@@ -950,7 +947,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -136, y: 19}
+  m_AnchoredPosition: {x: 142, y: -143.6}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 1, y: 0}
 --- !u!1 &884606116
@@ -1670,7 +1667,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -277, y: 26}
+  m_AnchoredPosition: {x: 229, y: -143.6}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1421173444
@@ -1883,10 +1880,6 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1583412844008782550, guid: 90c9c159be4a0114d995d1e6d76ed80e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1583412844008782550, guid: 90c9c159be4a0114d995d1e6d76ed80e, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.9990483
       objectReference: {fileID: 0}
@@ -2092,7 +2085,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5560265602976638053, guid: 90c9c159be4a0114d995d1e6d76ed80e, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5560265602976638053, guid: 90c9c159be4a0114d995d1e6d76ed80e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2795,7 +2788,7 @@ Transform:
   m_Children:
   - {fileID: 490573767}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1828997064
 GameObject:

@@ -41,6 +41,7 @@ public class HandCardData : ScriptableObject
             return;
         }
         var targets = SetTarget();
+        Debug.Log(targets.Count);
         foreach (var targetCard in targets)
         {
             targetCard.TakeDamage(effectPower * (int)effectType);

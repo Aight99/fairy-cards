@@ -125,6 +125,7 @@ public class GameManager : MonoBehaviour
             HandandDeck.SetActive(false);
         };
 
+
     }
 
 
@@ -154,7 +155,8 @@ public class GameManager : MonoBehaviour
         switch (newState)
         {
             case States.Idle:
-                onTurnEnd.Invoke(null, null) ;
+                Debug.Log("idel");
+                onTurnEnd?.Invoke(null, null) ;
                 break;
             case States.PlayerAttack:
                 break;

@@ -18,14 +18,14 @@ public class Hand : MonoBehaviour
     private float _moveCooldown = 0;
     private float _cardGap;
 
-    private void Awake()
+    private void Start()
     {
         _cardGap = deck.GetCardSize().x * deck.GetCardLocalScale().x * .6f;
         SetCardPositions(_startingCardCount);
         GetCardsFromDeck(_startingCardCount);
         GameManager.onTurnEnd += (sender, args) =>
         {
-          
+            Debug.Log("Draw");
             GetCardsFromDeck(2);
         };
     }
