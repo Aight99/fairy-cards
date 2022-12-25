@@ -106,13 +106,13 @@ public class Hand : MonoBehaviour
 
     private void GetCardsFromDeck(int numberOfCards)
     {
-
-
         for (int i = 0; i < numberOfCards; i++)
         {
             if (_cards.Count == _maxCardsInHand)
+            {
                 break;
-             GetCardFromDeck();
+            }
+            GetCardFromDeck();
         }
     }
 

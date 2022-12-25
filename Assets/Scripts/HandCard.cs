@@ -51,7 +51,7 @@ public class HandCard : MonoBehaviour
              _spriteRenderer.sortingOrder = _cardSortingLayer;
         };
 
-        manaCost.text = cardData.manaValue.ToString();
+        manaCost.text = cardData.manaCost.ToString();
 
     }
 
@@ -88,9 +88,9 @@ public class HandCard : MonoBehaviour
             onCursorEnter?.Invoke(this, null);
 
 
-        if (isClick && isFirstInPile && cardData.manaValue <= ManaManager.CurrentManaValue)
+        if (isClick && isFirstInPile && cardData.manaCost <= ManaManager.CurrentManaValue)
         {
-            ManaManager.TakeMana(cardData.manaValue);
+            ManaManager.TakeMana(cardData.manaCost);
             onPlay?.Invoke(this, null);
         }
         _prevHitValue = isFirstInPile;

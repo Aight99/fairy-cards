@@ -9,7 +9,11 @@ using System;
 
 public class Card : MonoBehaviour
 {
-
+    [SerializeField] public GameObject _gardInfo;
+    [SerializeField] private CardTypes cardType;
+    
+    public Character character;
+    
     public EventHandler onCursorEnter;
     public EventHandler onCursorLeft;
     public EventHandler onClick;
@@ -18,21 +22,11 @@ public class Card : MonoBehaviour
     public bool canAttack = true;
 
     private BoxCollider _boxCollider;
-    [SerializeField]
-    public GameObject _gardInfo;
     private bool prevHitValue;
 
-    [SerializeField]
-    private CardTypes cardType;
-
-
-
     public Attack[] Attacks;
-
-
     public TextMeshPro healthPointText;
     public StatsInfo stats;
-
     private int healthPoints;
 
     private void Awake()

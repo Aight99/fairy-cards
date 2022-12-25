@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1ccd306ff0d0c647a8d19f7dbf3e070, type: 3}
+  m_Script: {fileID: 11500000, guid: 21534e4e4b939d247908c166d7019cbb, type: 3}
   m_Name: Fireball
   m_EditorClassIdentifier: 
-  name: "\u041E\u0433\u043D\u0435\u0448\u0430\u0440"
-  description: "\u0427\u0443\u0442\u044C \u0442\u0451\u043F\u043B\u044B\u0439"
-  manaValue: 3
+  name: 
+  description: 
+  manaValue: 0
