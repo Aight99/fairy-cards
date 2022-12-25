@@ -95,7 +95,7 @@ public class Card : MonoBehaviour
         if (healthPoints <= 0)
         {
             onDead?.Invoke(this, null);
-            Destroy(gameObject);
+            return;
         }
 
         healthPointText.text = healthPoints.ToString();

@@ -49,27 +49,32 @@ public class EnemyController : MonoBehaviour
 
             //enemy.AnimateAttack(GameManager.PlayerCard, () => { });
 
+            
             var basePosition = enemy.transform.position;
-            var tween = enemy.transform.DOMove(GameManager.PlayerCard.transform.position, 0.3f);
-            tween.onComplete += () =>
+
+            if (GameManager.PlayerCard != null)
             {
-                GameManager.PlayerCard.TakeDamage(randomAttack.Damage);
-            };
+                var tween = enemy.transform.DOMove(GameManager.PlayerCard?.transform.position ?? basePosition, 0.3f);
+                tween.onComplete += () =>
+                {
+                    GameManager.PlayerCard?.TakeDamage(randomAttack.Damage);
+                };
 
-            seq.Append(tween);
+                seq.Append(tween);
 
 
-            seq.Append(enemy.transform.DOMove(basePosition, 0.3f));
+                seq.Append(enemy.transform.DOMove(basePosition, 0.3f));
 
 
-            seq.AppendInterval(0.3f);
-
+                seq.AppendInterval(0.3f);
+            }
             //GameManager.PlayerCard.TakeDamage(randomAttack.Damage);
             GameManager.ChangeState(States.Waiting);
         }
 
         seq.onComplete += () =>
         {
+           
             GameManager.ChangeState(States.Idle);
         };
 

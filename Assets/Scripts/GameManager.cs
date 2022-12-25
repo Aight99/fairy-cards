@@ -42,13 +42,22 @@ public class GameManager : MonoBehaviour
 
     public Transform PlayerCardSpot;
     public Card PlayerCardPrefab;
-    
+
+
+    public GameObject UIOverlay;
+    public GameObject AfterBattleScreen;
+    public GameObject HandandDeck;
     
     public static Card PlayerCard;
 
     
     void Start()
     {
+        onLose = null;
+        onWin = null;
+        onTurnEnd = null;
+
+        CurrentState = States.Idle;
         EnemyCardsList = new List<Card>();
 
         mainCamera = Camera.main;
@@ -70,6 +79,11 @@ public class GameManager : MonoBehaviour
                 (sender as Card)._gardInfo.SetActive(false);
             };
 
+            randomEnmeyCard.onDead += (sender, args) =>
+            {
+                Destroy((sender as Card).gameObject);
+            };
+
 
         }
 
@@ -89,22 +103,41 @@ public class GameManager : MonoBehaviour
 
         PlayerCard.onDead += (object sender, EventArgs args) =>
         {
+            PlayerCard.gameObject.SetActive(false);
             onLose?.Invoke(null, null);
         };
 
         PlayerManager.Init();
         EnemyController.Init();
         ManaManager.Init();
+
+        onLose += (sender, args) =>
+        {
+            UIOverlay.SetActive(false);
+            AfterBattleScreen.SetActive(true);
+            HandandDeck.SetActive(false);
+        };
+
+        onWin += (sender, args) =>
+        {
+            UIOverlay.SetActive(false);
+            AfterBattleScreen.SetActive(true);
+            HandandDeck.SetActive(false);
+        };
+
     }
 
 
     private void Update()
     {
-
+       
     }
 
     public void EndPlayerTurn()
     {
+        if (CurrentState != States.Idle && CurrentState != States.PlayerAttack)
+            return;
+
         ChangeState(States.EnemyAttack);
     }
 
