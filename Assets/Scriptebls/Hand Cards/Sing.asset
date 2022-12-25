@@ -20,6 +20,6 @@ MonoBehaviour:
   effectPower: 7
   effectType: 1
   targetType: 1
-  manaCost: 2
+  manaCost: 3
   cardsGain: 0
   manaGain: 0

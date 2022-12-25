@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -798,10 +798,7 @@ MonoBehaviour:
   EnemyCardsPrefab:
   - {fileID: 6165453052047450781, guid: 546fce8bdbf7a0a4cbbc337b04f64303, type: 3}
   PlayerCardSpot: {fileID: 1555998949}
-  PlayerCardPrefabs:
-  - {fileID: 6165453052047450781, guid: 4817526051ba00b42b1a90f3f3969b22, type: 3}
-  - {fileID: 6165453052047450781, guid: 546fce8bdbf7a0a4cbbc337b04f64303, type: 3}
-  - {fileID: 6165453052047450781, guid: 4817526051ba00b42b1a90f3f3969b22, type: 3}
+  PlayerCardPrefab: {fileID: 6165453052047450781, guid: 4817526051ba00b42b1a90f3f3969b22, type: 3}
   UIOverlay: {fileID: 1828997064}
   AfterBattleScreen: {fileID: 1010220934}
   HandandDeck: {fileID: 153513590}
