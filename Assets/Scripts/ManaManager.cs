@@ -42,6 +42,12 @@ public class ManaManager : MonoBehaviour
         instance.manaText.text = $"{CurrentManaValue}/{MaxManValue}";
     }
 
+    public static void GiveMana(int amount)
+    {
+        CurrentManaValue += amount;
+        CurrentManaValue %= (MaxManValue + 1);
+        instance.manaText.text = $"{CurrentManaValue}/{MaxManValue}";
+    }
 
     public static void TakeMana(int amount)
     {
