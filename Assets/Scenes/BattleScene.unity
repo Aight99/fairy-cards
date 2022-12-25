@@ -560,7 +560,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 106.4, y: -68.3}
+  m_AnchoredPosition: {x: 100.4, y: -18.1}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &490573768
@@ -924,7 +924,9 @@ MonoBehaviour:
   - {fileID: 1703951246}
   - {fileID: 1694455693}
   EnemyCardsPrefab:
-  - {fileID: 6165453052047450781, guid: 546fce8bdbf7a0a4cbbc337b04f64303, type: 3}
+  - {fileID: 6165453052047450781, guid: e68cec50472ec2c46944ad7c17f7c524, type: 3}
+  - {fileID: 6165453052047450781, guid: e68cec50472ec2c46944ad7c17f7c524, type: 3}
+  - {fileID: 6165453052047450781, guid: e68cec50472ec2c46944ad7c17f7c524, type: 3}
   PlayerCardSpot: {fileID: 1555998949}
   PlayerCardPrefab: {fileID: 6165453052047450781, guid: 4817526051ba00b42b1a90f3f3969b22, type: 3}
   UIOverlay: {fileID: 1828997064}
@@ -1041,8 +1043,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: a0a96a2c7ae1eaf4992a888da9dc1563, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1068,16 +1070,16 @@ RectTransform:
   m_GameObject: {fileID: 862420553}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.8126286, y: 1.8126286, z: 1.8126286}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1828997065}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -196.5, y: 18.5}
-  m_SizeDelta: {x: 30, y: 30}
+  m_AnchoredPosition: {x: -152, y: 19}
+  m_SizeDelta: {x: 60, y: 90}
   m_Pivot: {x: 1, y: 0}
 --- !u!1 &884606116
 GameObject:
@@ -1163,8 +1165,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 61.69015
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1188,7 +1190,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.4, y: -1, z: -34.4}
+  m_LocalPosition: {x: -1.9, y: -0.4, z: -34.4}
   m_LocalScale: {x: 16, y: 9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1800,7 +1802,7 @@ RectTransform:
   m_GameObject: {fileID: 1421173442}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.404687, y: 1.7125081, z: 1.3536543}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1828997065}
@@ -1808,8 +1810,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -85.900024, y: 18.5}
-  m_SizeDelta: {x: 30, y: 30}
+  m_AnchoredPosition: {x: -39, y: 22}
+  m_SizeDelta: {x: 60, y: 90}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1421173444
 MonoBehaviour:
@@ -1887,8 +1889,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 6306c18ca1e23e84aa961c7df48b426d, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2957,7 +2959,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1421173443}
   - {fileID: 862420557}

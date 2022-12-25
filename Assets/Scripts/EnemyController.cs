@@ -62,9 +62,6 @@ public class EnemyController : MonoBehaviour
 
                 seq.Append(tween);
 
-
-                GameObject.Find
-
                 seq.Append(enemy.transform.DOMove(basePosition, 0.3f));
 
 

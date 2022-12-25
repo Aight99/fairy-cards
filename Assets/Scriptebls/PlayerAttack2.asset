@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Damage: 2
   Cost: 1
-  spriteImage: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  spriteImage: {fileID: 21300000, guid: a0a96a2c7ae1eaf4992a888da9dc1563, type: 3}
   Name: Attack num 2
   Description: 
   sound: {fileID: 8300000, guid: 8243f49904eb3a2469d891788b804e1d, type: 3}

@@ -9,12 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 922f81faefc199740a0ca392a42109d4, type: 3}
-  m_Name: EnemyAttack1
+  m_Script: {fileID: 11500000, guid: cef82a76b594b604fa78fb4d7c0af275, type: 3}
+  m_Name: rusalka
   m_EditorClassIdentifier: 
-  Damage: 5
-  Cost: 0
-  spriteImage: {fileID: 0}
-  Name: Enemy Attack 1
-  Description: 
-  sound: {fileID: 8300000, guid: 84aa424174e718b4abdf49974a890aff, type: 3}
+  healthPoints: 25

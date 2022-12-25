@@ -64,21 +64,22 @@ public class GameManager : MonoBehaviour
 
         mainCamera = Camera.main;
 
-        foreach (var spot in EnemyCardsSpots)
+        for(int i =0; i < 3; i ++)
         {
-            var randomEnmeyCard = EnemyCardsPrefab[UnityEngine.Random.Range(0, EnemyCardsPrefab.Length)];
+            var spot = EnemyCardsSpots[i];
+            var randomEnmeyCard = EnemyCardsPrefab[i];
             randomEnmeyCard = Instantiate(randomEnmeyCard, spot.position, Quaternion.identity);
             randomEnmeyCard.transform.SetParent(AllCardsSpot);
             EnemyCardsList.Add(randomEnmeyCard);
 
             randomEnmeyCard.onCursorEnter += (object sender, EventArgs args) =>
             {
-                (sender as Card)._gardInfo.SetActive(true);
+                //(sender as Card)._gardInfo.SetActive(true);
             };
             
             randomEnmeyCard.onCursorLeft += (object sender, EventArgs args) =>
             {
-                (sender as Card)._gardInfo.SetActive(false);
+                //(sender as Card)._gardInfo.SetActive(false);
             };
 
             randomEnmeyCard.onDead += (sender, args) =>
@@ -95,12 +96,12 @@ public class GameManager : MonoBehaviour
 
         PlayerCard.onCursorEnter += (object sender, EventArgs args) =>
         {
-            (sender as Card)._gardInfo.SetActive(true);
+           // (sender as Card)._gardInfo.SetActive(true);
         };
 
         PlayerCard.onCursorLeft += (object sender, EventArgs args) =>
         {
-            (sender as Card)._gardInfo.SetActive(false);
+            //(sender as Card)._gardInfo.SetActive(false);
         };
 
         PlayerCard.onDead += (object sender, EventArgs args) =>
