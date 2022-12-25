@@ -11,6 +11,7 @@ public class HandCard : MonoBehaviour
 
     [SerializeField] private HandCardData cardData;
     [SerializeField] private TextMeshPro manaCost;
+    public AudioSource EffectSound;
 
     public EventHandler onCursorEnter;
     public EventHandler onCursorLeft;
@@ -21,6 +22,8 @@ public class HandCard : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private int _cardSortingLayer;
     private bool _prevHitValue;
+
+
 
     private void OnEnable()
     {
@@ -55,6 +58,7 @@ public class HandCard : MonoBehaviour
         onPlay += (sender, args) =>
         {
             cardData.ApplyEffect();
+            EffectSound.Play();
         };
 
     }

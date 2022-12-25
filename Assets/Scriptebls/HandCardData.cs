@@ -32,6 +32,8 @@ public class HandCardData : ScriptableObject
     [Header("Special Effects")]
     public int cardsGain;
     public int manaGain;
+
+ 
     
     public void ApplyEffect()
     {

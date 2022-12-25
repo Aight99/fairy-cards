@@ -43,6 +43,9 @@ public class PlayerManager : MonoBehaviour
                 if (!GameManager.PlayerCard.canAttack)
                     return;
 
+                GameManager.PlayerCard.SoundEffect.clip = CurrentSelectedAttack.sound;
+                GameManager.PlayerCard.SoundEffect.Play();
+
                 GameManager.PlayerCard.AnimateAttack((sender as Card) , () => { GameManager.ChangeState(States.EnemyAttack); });
                 (sender as Card).TakeDamage(CurrentSelectedAttack.Damage);
                 ManaManager.TakeMana(CurrentSelectedAttack.Cost);

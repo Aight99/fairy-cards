@@ -11,7 +11,8 @@ public class Card : MonoBehaviour
 {
     [SerializeField] public GameObject _gardInfo;
     [SerializeField] private CardTypes cardType;
-    
+    public AudioSource SoundEffect;
+
     public Character character;
     
     public EventHandler onCursorEnter;

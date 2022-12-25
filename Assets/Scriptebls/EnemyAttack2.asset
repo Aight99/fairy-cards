@@ -17,3 +17,4 @@ MonoBehaviour:
   spriteImage: {fileID: 0}
   Name: EnemyAttack 2
   Description: 
+  sound: {fileID: 8300000, guid: 84aa424174e718b4abdf49974a890aff, type: 3}

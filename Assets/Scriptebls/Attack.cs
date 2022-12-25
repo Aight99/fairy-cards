@@ -14,4 +14,6 @@ public class Attack : ScriptableObject
     public string Name;
     public string Description;
 
+    public AudioClip sound;
+
 }
