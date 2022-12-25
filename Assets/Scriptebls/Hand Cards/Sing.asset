@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 21534e4e4b939d247908c166d7019cbb, type: 3}
-  m_Name: Fireball
+  m_Name: Sing
   m_EditorClassIdentifier: 
-  name: "\u041E\u0433\u043D\u0435\u0448\u0430\u0440"
-  description: "\u0414\u043E\u0432\u043E\u043B\u044C\u043D\u043E \u0442\u0451\u043F\u043B\u044B\u0439"
-  specialSpeech: 
-  SpecialUser: 0
-  effectPower: 3
+  name: "\u041F\u0435\u043D\u0438\u0435"
+  description: "\u0418\u0437\u0431\u0435\u0433\u0430\u0439 \u043F\u0440\u0435\u0431\u0440\u0435\u0436\u043D\u044B\u0445
+    \u0441\u043A\u0430\u043B"
+  specialSpeech: "\u0418\u0434\u0438 \u043A\u043E \u043C\u043D\u0435"
+  SpecialUser: 6
+  effectPower: 7
   effectType: 1
-  targetType: 0
-  manaCost: 1
+  targetType: 1
+  manaCost: 2
   cardsGain: 0
   manaGain: 0

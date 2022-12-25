@@ -32,10 +32,7 @@ public class HandCard : MonoBehaviour
         var scaleFactor = 1.3f;
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _boxCollider = GetComponent<BoxCollider>();
-
-        _spriteRenderer.color = Random.ColorHSV();
-
-
+        
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         _prevHitValue = _boxCollider.Raycast(ray, out RaycastHit hitInfo, 1000);
 

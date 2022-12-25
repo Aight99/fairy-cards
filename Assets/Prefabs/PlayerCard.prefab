@@ -249,7 +249,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 510eb88483cfe9148b1824b1ade56142, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7b63d0b84cb149940991926c1cc22d44, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -287,6 +287,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gardInfo: {fileID: 6165453052722989074}
   cardType: 1
+  character: 0
+  canAttack: 1
   Attacks:
   - {fileID: 11400000, guid: 1af7f32843d623c4f8168089caaa3d62, type: 2}
   - {fileID: 11400000, guid: a1753cb5481a64c46b6d87fc2b546924, type: 2}

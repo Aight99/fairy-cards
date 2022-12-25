@@ -46,11 +46,9 @@ public class Deck : MonoBehaviour
     {
         var card = _cards[0];
         _cards.RemoveAt(0);
-        Debug.Log($"In deck {_cards.Count} cards, but {_discard.Count} in discard");
         if (_cards.Count == 0)
         {
             RefillDeck();
-            Debug.Log($" Refresh!!! {_cards.Count} in deck  cards, {_discard.Count} in discard");
         }
         return card;
     }

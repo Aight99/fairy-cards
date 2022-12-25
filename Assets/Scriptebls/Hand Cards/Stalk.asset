@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 21534e4e4b939d247908c166d7019cbb, type: 3}
-  m_Name: Fireball
+  m_Name: Stalk
   m_EditorClassIdentifier: 
-  name: "\u041E\u0433\u043D\u0435\u0448\u0430\u0440"
-  description: "\u0414\u043E\u0432\u043E\u043B\u044C\u043D\u043E \u0442\u0451\u043F\u043B\u044B\u0439"
+  name: "\u041A\u043E\u0447\u0435\u0440\u044B\u0436\u043A\u0430"
+  description: "\u041F\u0440\u043E\u0441\u0442\u043E \u043A\u043E\u0447\u0435\u0440\u044B\u0436\u043A\u0430"
   specialSpeech: 
   SpecialUser: 0
-  effectPower: 3
+  effectPower: 0
   effectType: 1
   targetType: 0
-  manaCost: 1
+  manaCost: 0
   cardsGain: 0
   manaGain: 0
