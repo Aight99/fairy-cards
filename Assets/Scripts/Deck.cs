@@ -34,6 +34,7 @@ public class Deck : MonoBehaviour
             card.transform.localPosition = Vector3.zero;
         }
         _cards.AddRange(_discard);
+        Debug.Log(_cards.Count);
         _discard.Clear();
         Shuffle();
     }
@@ -48,6 +49,7 @@ public class Deck : MonoBehaviour
         _cards.RemoveAt(0);
         if (_cards.Count == 0)
         {
+            Debug.Log("Refill");
             RefillDeck();
         }
         return card;

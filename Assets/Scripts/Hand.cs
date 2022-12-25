@@ -30,40 +30,17 @@ public class Hand : MonoBehaviour
         };
     }
 
-    private void DEBUG_Discard()
+    private void UseCard(HandCard card)
     {
-        UseCard(0);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKey(KeyCode.R) && _cards.Count == 0)
-        {
-            GetCardsFromDeck(5);
-        }
-        _moveCooldown -= Time.deltaTime;
-        if (_moveCooldown > 0)
-        {
-            return;
-        }
-        if (Input.GetKey(KeyCode.Space))
-        {
-            DEBUG_Discard();
-        }
-        _moveCooldown = 1f;
-    }
-
-    private void UseCard(int cardIndex)
-    {
-        deck.DiscardCard(_cards[cardIndex]);
-        var cardTransform = _cards[cardIndex].transform;
+        deck.DiscardCard(card);
+        var cardTransform = card.transform;
         cardTransform.DOMove(cardTransform.up * 30, moveSpeed).OnComplete(() =>
         {
             // TODO Иногда запускается после SetActive(true),
             // в колоде появляется пустая выключенная карта
             cardTransform.gameObject.SetActive(false);
         });
-        _cards.RemoveAt(cardIndex);
+        _cards.Remove(card);
         SetCardPositions(_cards.Count);
         for (int i = 0; i < _cards.Count; i++)
         {
@@ -123,8 +100,7 @@ public class Hand : MonoBehaviour
         UpdateCardPositions();
         card.onPlay += (sender, args) =>
         {
-            int index = _cards.IndexOf((sender as HandCard));
-            UseCard(index);
+            UseCard(sender as HandCard);
 
             //deck.DiscardCard((sender as HandCard));
             //var cardTransform = (sender as HandCard).transform;
