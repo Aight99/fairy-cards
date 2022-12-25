@@ -2,10 +2,13 @@ using System;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using static UnityEngine.UI.Button;
 using Random = UnityEngine.Random;
 
 public class HandCard : MonoBehaviour
 {
+
     [SerializeField] private HandCardData cardData;
     [SerializeField] private TextMeshPro manaCost;
 

@@ -15,7 +15,7 @@ public class Card : MonoBehaviour
     public EventHandler onClick;
     public EventHandler onDead;
 
-
+    public bool canAttack = true;
 
     private BoxCollider _boxCollider;
     [SerializeField]
@@ -37,6 +37,7 @@ public class Card : MonoBehaviour
 
     private void Awake()
     {
+        canAttack = true;
         _boxCollider = GetComponent<BoxCollider>();
 
         Ray ray = GameManager.mainCamera.ScreenPointToRay(Input.mousePosition);
@@ -45,6 +46,11 @@ public class Card : MonoBehaviour
 
         healthPointText.text = stats.healthPoints.ToString();
         healthPoints = stats.healthPoints;
+
+        GameManager.onTurnEnd += (sender, args) =>
+        {
+            canAttack = true;
+        };
 
     }
 
@@ -67,8 +73,6 @@ public class Card : MonoBehaviour
 
         prevHitValue = isHit;
     }
-
-    public delegate void onEndDelegate();
 
     public void AnimateAttack(Card target , TweenCallback onEnd)
     {

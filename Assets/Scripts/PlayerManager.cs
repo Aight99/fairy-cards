@@ -29,6 +29,8 @@ public class PlayerManager : MonoBehaviour
 
         foreach (var enemyCard in GameManager.EnemyCardsList)
         {
+            
+
             enemyCard.onClick += (object sender, EventArgs args) =>
             {
 
@@ -36,6 +38,9 @@ public class PlayerManager : MonoBehaviour
                     return;
 
                 if (CurrentSelectedAttack == null)
+                    return;
+
+                if (!GameManager.PlayerCard.canAttack)
                     return;
 
                 GameManager.PlayerCard.AnimateAttack((sender as Card) , () => { GameManager.ChangeState(States.EnemyAttack); });

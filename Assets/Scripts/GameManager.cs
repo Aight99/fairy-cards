@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
 
         PlayerCard.onDead += (object sender, EventArgs args) =>
         {
-            onLose.Invoke(null, null);
+            onLose?.Invoke(null, null);
         };
 
         PlayerManager.Init();
