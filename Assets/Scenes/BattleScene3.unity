@@ -1008,9 +1008,9 @@ MonoBehaviour:
   - {fileID: 1703951246}
   - {fileID: 1694455693}
   EnemyCardsPrefab:
-  - {fileID: 6165453052047450781, guid: 60730693a9015384cb1f37a8ced5c969, type: 3}
-  - {fileID: 6165453052047450781, guid: 60730693a9015384cb1f37a8ced5c969, type: 3}
-  - {fileID: 6165453052047450781, guid: 60730693a9015384cb1f37a8ced5c969, type: 3}
+  - {fileID: 6165453052047450781, guid: f3dfdec3f9ea05e47a04c10a825591c2, type: 3}
+  - {fileID: 6165453052047450781, guid: 7b25e54fcbbc4fd41b519c446cf508c5, type: 3}
+  - {fileID: 6165453052047450781, guid: a86bd8c878366584c9a02512e94a0e6f, type: 3}
   PlayerCardSpot: {fileID: 1555998949}
   PlayerCardPrefab: {fileID: 6165453052047450781, guid: 4817526051ba00b42b1a90f3f3969b22, type: 3}
   UIOverlay: {fileID: 1828997064}

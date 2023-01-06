@@ -551,7 +551,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 490573766}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -560,7 +560,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 106.4, y: -68.3}
+  m_AnchoredPosition: {x: 113.5, y: -20.6}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &490573768
@@ -592,8 +592,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294916352
-  m_fontColor: {r: 0, g: 0.22344899, b: 1, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -926,7 +926,7 @@ MonoBehaviour:
   EnemyCardsPrefab:
   - {fileID: 6165453052047450781, guid: 7b25e54fcbbc4fd41b519c446cf508c5, type: 3}
   - {fileID: 6165453052047450781, guid: 60730693a9015384cb1f37a8ced5c969, type: 3}
-  - {fileID: 6165453052047450781, guid: 7b25e54fcbbc4fd41b519c446cf508c5, type: 3}
+  - {fileID: 6165453052047450781, guid: e68cec50472ec2c46944ad7c17f7c524, type: 3}
   PlayerCardSpot: {fileID: 1555998949}
   PlayerCardPrefab: {fileID: 6165453052047450781, guid: 4817526051ba00b42b1a90f3f3969b22, type: 3}
   UIOverlay: {fileID: 1828997064}
@@ -1529,8 +1529,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1068807426}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.6123586, y: -19.505138, z: -69.1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 113.4, y: -19.505138, z: -2}
+  m_LocalScale: {x: 21.252, y: 21.252, z: 21.252}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1793923323}
