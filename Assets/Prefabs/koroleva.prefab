@@ -288,7 +288,7 @@ MonoBehaviour:
   _gardInfo: {fileID: 6165453052722989074}
   cardType: 1
   SoundEffect: {fileID: 0}
-  character: 0
+  character: 4
   canAttack: 1
   Attacks:
   - {fileID: 11400000, guid: dcd4f3f9dcddfe547ae102a4643021b0, type: 2}
