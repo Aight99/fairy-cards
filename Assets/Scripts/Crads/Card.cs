@@ -6,9 +6,9 @@ using UnityEngine.Events;
 
 public abstract class Card : Updateble
 {
-    public UnityEvent onCursorEnter;
-    public UnityEvent onCursorLeft;
-    public UnityEvent onClick;
+    public UnityEvent<Card> onCursorEnter;
+    public UnityEvent<Card> onCursorLeft;
+    public UnityEvent<Card> onClick;
 
 
     private BoxCollider boxCollider;
@@ -19,9 +19,9 @@ public abstract class Card : Updateble
 
         prevHitValue = false;
 
-        onCursorEnter = new UnityEvent();
-        onCursorLeft = new UnityEvent();
-        onClick = new UnityEvent();
+        onCursorEnter = new UnityEvent<Card>();
+        onCursorLeft = new UnityEvent<Card>();
+        onClick = new UnityEvent<Card>();
 
 
         boxCollider = GetComponent<BoxCollider>();
@@ -41,24 +41,26 @@ public abstract class Card : Updateble
         if (isHit && isClick)
         {
             Click();    
-            onClick?.Invoke();
+            onClick?.Invoke(this);
         }
 
         if (prevHitValue && !isHit)
         {
             CursorLeft();
-            onCursorLeft?.Invoke();
+            onCursorLeft?.Invoke(this);
         }
 
         if (!prevHitValue && isHit)
         {
             CursorEnter();
-            onCursorEnter?.Invoke();
+            onCursorEnter?.Invoke(this);
         }
 
         prevHitValue = isHit;
 
     }
+
+    public Vector3 getSize() => boxCollider.bounds.size;
 
 
     protected virtual void Click() { }

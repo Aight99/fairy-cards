@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class Deck : MonoBehaviour
 {
-    private List<CardInHand> _draw;
-    private List<CardInHand> _discard;
+    [SerializeField] private List<CardInHand> _draw;
+    [SerializeField] private List<CardInHand> _discard;
+
+    [SerializeField] private Transform _drawPoint;
+    [SerializeField] private Transform _discardPoint;
 
     private void Start()
     {
@@ -14,6 +17,9 @@ public class Deck : MonoBehaviour
             Debug.LogError("Draw deck was null");
 
         _discard = new List<CardInHand>();
+
+        foreach(var card in _draw)
+            card.onPlay.AddListener(DiscardCard); 
     }
 
     private void Shuffle() => _draw.OrderBy(card => Random.value);
@@ -30,8 +36,29 @@ public class Deck : MonoBehaviour
         return newCard;
     }
 
-    public void DiscadCard(CardInHand card)
+    public void RefillDeck()
     {
+        _draw.AddRange(_discard);
+        _discard.Clear();
+
+        foreach (var card in _draw)
+            card.transform.SetParent(_drawPoint);
+    }
+
+    public void DiscardCard(Card card)
+    {
+        if (card is CardInHand)
+        {
+            DiscardCard(card as CardInHand);
+            return;
+        }
+        Debug.LogError("Try to discard not hand card");
+    }
+
+    public void DiscardCard(CardInHand card)
+    {
+        card.transform.SetParent(_discardPoint);
+        card.transform.position = _discardPoint.position;
         _discard.Add(card);
     }
 
