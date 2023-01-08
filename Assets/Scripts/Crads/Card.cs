@@ -19,6 +19,24 @@ public class Card : Updateble
 
         prevHitValue = false;
 
+        if (onClick.GetPersistentEventCount() > 0)
+        {
+            Debug.LogError("Try to remove event listener");
+            throw new System.Exception();
+        }
+        
+        if (onCursorLeft.GetPersistentEventCount() > 0)
+        {
+            Debug.LogError("Try to remove event listener");
+            throw new System.Exception();
+        }
+        
+        if (onCursorEnter.GetPersistentEventCount() > 0)
+        {
+            Debug.LogError("Try to remove event listener");
+            throw new System.Exception();
+        }
+
         onCursorEnter = new UnityEvent<Card>();
         onCursorLeft = new UnityEvent<Card>();
         onClick = new UnityEvent<Card>();
@@ -57,6 +75,7 @@ public class Card : Updateble
 
         if (isHit && isClick)
         {
+           
             Click();    
             onClick?.Invoke(this);
         }
