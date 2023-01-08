@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using UnityEngine;
 
 namespace BattleSystem
@@ -14,6 +15,9 @@ namespace BattleSystem
             Name = "lorem ipsum";
         }
 
+
+        public CreatureData creatureData;
+
         // Нужен ли Null Object?
         // public static Creature NullObject() => new Creature();
         
@@ -26,6 +30,9 @@ namespace BattleSystem
 
         public override string ToString()
         {
+
+           
+
             return $"「{Name}」: {Health} HP";
         }
     }

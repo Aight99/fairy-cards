@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BattleSystem;
 
 public class TableConroller : Updateble
 {
@@ -35,9 +36,14 @@ public class TableConroller : Updateble
     private Updateble currentUpdateble;
 
 
+    [SerializeField] private Battle battleInfo;
+    [SerializeField] private BattleSystem.BattleSystem battleSystem;
+
 
     private void Start()
     {
+        battleSystem.LoadBattle(battleInfo);
+
         currentUpdateble = this;
 
         if (enemyCards.Count > 5)
@@ -113,6 +119,12 @@ public class TableConroller : Updateble
         currentUpdateble = this;
     }
 
+
+    private void RebaseCardOrder()
+    {
+        // сделать 
+    }
+
     private void RebaseCardPosition()
     {
         for (int i = 0; i < 5; i++)
@@ -134,17 +146,21 @@ public class TableConroller : Updateble
         int selectedPlayerCardIndex = Array.IndexOf(playerCardsOnTable, SelectedPlayerCard);
         int selectedEnemyCardIndex = Array.IndexOf(enemyCardsOnTable, card);
 
-        if (!checkEnemyEnableToAttack(selectedEnemyCardIndex)) return;
+        if (!checkEnemyEnableToAttack(selectedPlayerCardIndex , selectedEnemyCardIndex)) return;
 
-        Debug.Log($"Player Card {selectedPlayerCardIndex} attack enemy card {selectedEnemyCardIndex}");
+        Debug.Log($"Player Card {selectedPlayerCardIndex} attack enemy card {selectedEnemyCardIndex + 5}");
 
+        
+        battleSystem.ExecuteCommand(Command.AttackCommand(selectedPlayerCardIndex, selectedEnemyCardIndex + 5));
+
+        
         SelectedPlayerCard = null;
 
         currentUpdateble = EnemyController;
     }
 
     // Индекс карты на столе !!!
-    private bool checkEnemyEnableToAttack(int enemyCardIndex) => true;
+    private bool checkEnemyEnableToAttack(int playerInex , int enemyCardIndex) => true;
 
 
     private void EmptyPlayerSpaceClick(Card card)
@@ -156,11 +172,13 @@ public class TableConroller : Updateble
         int selectedeEmptySpaceIndex = Array.IndexOf(playerCardsOnTable, card);
 
 
-        if (!checkEmptySpaceEnableToMove(selectedeEmptySpaceIndex)) return;
+        if (!checkEmptySpaceEnableToMove(selectedPlayerCardIndex ,  selectedeEmptySpaceIndex)) return;
 
-        var temp = playerCardsOnTable[selectedPlayerCardIndex];
-        playerCardsOnTable[selectedPlayerCardIndex] = playerCardsOnTable[selectedeEmptySpaceIndex];
-        playerCardsOnTable[selectedeEmptySpaceIndex] = temp;
+        battleSystem.ExecuteCommand(Command.MoveCommand(selectedPlayerCardIndex, selectedeEmptySpaceIndex));
+
+        //var temp = playerCardsOnTable[selectedPlayerCardIndex];
+        //playerCardsOnTable[selectedPlayerCardIndex] = playerCardsOnTable[selectedeEmptySpaceIndex];
+        //playerCardsOnTable[selectedeEmptySpaceIndex] = temp;
 
         SelectedPlayerCard = null;
 
@@ -170,7 +188,7 @@ public class TableConroller : Updateble
     }
 
     // Индекс места на столе !!!
-    private bool checkEmptySpaceEnableToMove(int emptySpaceInde) => true;
+    private bool checkEmptySpaceEnableToMove(int playerInex , int emptySpaceInde) => true;
 
 
     public override void _Update()

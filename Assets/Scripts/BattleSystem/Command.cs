@@ -25,7 +25,9 @@ namespace BattleSystem
             .SetUser(userIndex)
             .SetTarget(targetIndex)
             .SetTurnEnd();
-        
+
+        public static Command MoveCommand(int card, int target) => new Command();
+
         public static Command PlayCardCommand() => new Command()
             .SetTurnEnd();
 

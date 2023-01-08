@@ -7,9 +7,19 @@ namespace BattleSystem
     {
         public static event Action PlayerTurnEnded;
         public static event Action PlayerWon;
+        // 0 - 4  PlayerCard
+        // 5 - 9  EnemyCard
         public static event Action<int, int> HealthChanged;
+        
         public static event Action<int> CharacterAwakened;
         public static event Action<int> ManaChanged;
+
+        /// <summary>
+        ///    первый параметр - кого
+        ///    второй параметр - куда
+        /// </summary>
+        public static event Action<int, int> ChangeCardPosition;
+
 
         public Context()
         {

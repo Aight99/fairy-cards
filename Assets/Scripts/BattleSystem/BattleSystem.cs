@@ -28,16 +28,20 @@ namespace BattleSystem
             int[] allySpawnOrder = {2, 1, 3, 0, 4};
             int[] enemySpawnOrder = {7, 6, 8, 5, 9};
             var spawnIndex = 0;
+
             foreach (var ally in battle.Allies)
             {
                 Context.Field[allySpawnOrder[spawnIndex]] = new Creature();
                 Debug.Log($"Loaded ally in {allySpawnOrder[spawnIndex]} place");
+                spawnIndex++;   
             }
+
             spawnIndex = 0;
             foreach (var enemy in battle.Enemies)
             {
                 Context.Field[enemySpawnOrder[spawnIndex]] = new Creature();
                 Debug.Log($"Loaded enemy in {enemySpawnOrder[spawnIndex]} place");
+                spawnIndex++;
             }
         }
 
