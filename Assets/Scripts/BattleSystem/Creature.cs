@@ -13,6 +13,9 @@ namespace BattleSystem
             Health = 10;
             Name = "lorem ipsum";
         }
+
+        // Нужен ли Null Object?
+        // public static Creature NullObject() => new Creature();
         
         // public Creature(GameObject cardPrefab)
         // {

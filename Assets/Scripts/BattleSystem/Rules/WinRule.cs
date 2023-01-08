@@ -13,10 +13,14 @@ namespace BattleSystem.Rules
         
         public void ApplyRule()
         {
-            if (_context.Enemies.Count == 0)
+            for (int i = 5; i < 10; i++)
             {
-                _context.ThrowWin();
+                if (_context.Field[i] != null)
+                {
+                    return;
+                }
             }
+            _context.ThrowWin();
         }
     }
 }

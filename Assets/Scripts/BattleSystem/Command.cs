@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine.UIElements;
 
 namespace BattleSystem
 {
@@ -9,16 +10,24 @@ namespace BattleSystem
         // public HandCardData Card { get; private set; }
         // public Attack Attack { get; private set; }
         
-        public Creature User { get; private set; }
-        public List<Creature> Targets { get; private set; }
+        public int UserIndex { get; private set; }
+        public int TargetIndex { get; private set; }
 
-        public Command()
+        private Command()
         {
             IsEndingTurn = false;
-            Targets = new List<Creature>();
         }
         
         public static Command CreateEmpty() => new Command();
+        public static Command EndTurnCommand() => new Command()
+            .SetTurnEnd();
+        public static Command AttackCommand(int userIndex, int targetIndex) => new Command()
+            .SetUser(userIndex)
+            .SetTarget(targetIndex)
+            .SetTurnEnd();
+        
+        public static Command PlayCardCommand() => new Command()
+            .SetTurnEnd();
 
         public Command SetTurnEnd()
         {
@@ -38,15 +47,15 @@ namespace BattleSystem
         //     return this;
         // }
 
-        public Command SetUser(Creature user)
+        public Command SetUser(int userIndex)
         {
-            User = user;
+            UserIndex = userIndex;
             return this;
         }
         
-        public Command AddTarget(Creature target)
+        public Command SetTarget(int targetIndex)
         {
-            Targets.Add(target);
+            TargetIndex = targetIndex;
             return this;
         }
         

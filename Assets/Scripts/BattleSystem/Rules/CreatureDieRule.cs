@@ -14,24 +14,13 @@ namespace BattleSystem.Rules
         
         public void ApplyRule()
         {
-            CheckList(_context.Allies);
-            CheckList(_context.Enemies);
-        }
-
-        private void CheckList(List<Creature> list)
-        {
-            var toRemove = new List<Creature>(5);
-            foreach (var creature in list)
+            for (int i = 0; i < _context.Field.Length; i++)
             {
-                if (creature.Health <= 0)
+                if (_context.Field[i].Health <= 0)
                 {
-                    Debug.Log($"DIE! {creature}");
-                    toRemove.Add(creature);
+                    Debug.Log($"DIE! On position {i}");
+                    _context.Field[i] = null;
                 }
-            }
-            foreach (var dead in toRemove)
-            {
-                list.Remove(dead);
             }
         }
     }

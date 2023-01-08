@@ -25,15 +25,19 @@ namespace BattleSystem
 
         public void LoadBattle(Battle battle)
         {
+            int[] allySpawnOrder = {2, 1, 3, 0, 4};
+            int[] enemySpawnOrder = {7, 6, 8, 5, 9};
+            var spawnIndex = 0;
             foreach (var ally in battle.Allies)
             {
-                Context.Allies.Add(new Creature());
-                Debug.Log($"Loaded {Context.Allies[^1].Name} with {Context.Allies[^1].Health} HP");
+                Context.Field[allySpawnOrder[spawnIndex]] = new Creature();
+                Debug.Log($"Loaded ally in {allySpawnOrder[spawnIndex]} place");
             }
+            spawnIndex = 0;
             foreach (var enemy in battle.Enemies)
             {
-                Context.Enemies.Add(new Creature());
-                Debug.Log($"Loaded {Context.Enemies[^1].Name} with {Context.Enemies[^1].Health} HP");
+                Context.Field[enemySpawnOrder[spawnIndex]] = new Creature();
+                Debug.Log($"Loaded enemy in {enemySpawnOrder[spawnIndex]} place");
             }
         }
 

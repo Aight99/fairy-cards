@@ -7,17 +7,18 @@ namespace BattleSystem
     {
         public static event Action PlayerTurnEnded;
         public static event Action PlayerWon;
+        public static event Action<int, int> HealthChanged;
+        public static event Action<int> CharacterAwakened;
+        public static event Action<int> ManaChanged;
 
         public Context()
         {
-            Enemies = new List<Creature>();
-            Allies = new List<Creature>();
+            Field = new Creature[10];
             MaxMana = 0;
             CurrentMana = 0;
         }
 
-        public List<Creature> Enemies { get; private set; }
-        public List<Creature> Allies { get; private set; }
+        public Creature[] Field { get; private set; }
         public int MaxMana { get; private set; }
         public int CurrentMana { get; private set; }
         public Command CurrentCommand { get; set; }
@@ -28,5 +29,8 @@ namespace BattleSystem
         public void EndTurn() => PlayerTurnEnded?.Invoke();
 
         public void ThrowWin() => PlayerWon?.Invoke();
+        public void ChangeHealth(int target, int amount) => HealthChanged?.Invoke(target, amount);
+        public void AwakeCharacter(int target) => CharacterAwakened?.Invoke(target);
+        public void ChangeMana(int target) => ManaChanged?.Invoke(target);
     }
 }
