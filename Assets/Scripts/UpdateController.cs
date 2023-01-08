@@ -4,17 +4,7 @@ using UnityEngine;
 
 public class UpdateController : MonoBehaviour
 {
-    [SerializeField] private Updateble CurrentUpdateble {
-        set {
-            if (value == _CurrentUpdateble)
-                return;
-            _CurrentUpdateble._End();
-            value._Start();
-            _CurrentUpdateble = value; 
-        }
-        get => _CurrentUpdateble; }
-
-    private Updateble _CurrentUpdateble;
+    [SerializeField] private Updateble CurrentUpdateble;
 
     // Start is called before the first frame update
     void Start()
@@ -45,7 +35,7 @@ public class UpdateController : MonoBehaviour
 }
 
 public abstract class Updateble : MonoBehaviour
-{
+{   
     public abstract void _Update();
 
     public virtual Updateble GetNextUpdateble() => this;

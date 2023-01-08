@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class Card : Updateble
+public class Card : Updateble
 {
     public UnityEvent<Card> onCursorEnter;
     public UnityEvent<Card> onCursorLeft;

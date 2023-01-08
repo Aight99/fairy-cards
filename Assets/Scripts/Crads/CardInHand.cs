@@ -29,7 +29,7 @@ public class CardInHand : Card
         Debug.Log("Card in Hand was played");
     }
 
-    private void Play()
+    protected virtual void Play()
     {
 
     }
