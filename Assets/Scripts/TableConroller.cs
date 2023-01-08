@@ -30,6 +30,7 @@ public class TableConroller : Updateble
 
 
     [SerializeField] private Updateble HandController;
+    [SerializeField] private Updateble EnemyController;
     [SerializeField] private EmptySpaceOnTable HandTrigger;
     private Updateble currentUpdateble;
 
@@ -138,6 +139,8 @@ public class TableConroller : Updateble
         Debug.Log($"Player Card {selectedPlayerCardIndex} attack enemy card {selectedEnemyCardIndex}");
 
         SelectedPlayerCard = null;
+
+        currentUpdateble = EnemyController;
     }
 
     // Индекс карты на столе !!!
@@ -162,6 +165,8 @@ public class TableConroller : Updateble
         SelectedPlayerCard = null;
 
         RebaseCardPosition();
+
+        currentUpdateble = EnemyController;
     }
 
     // Индекс места на столе !!!
