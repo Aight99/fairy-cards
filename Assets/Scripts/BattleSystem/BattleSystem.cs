@@ -27,12 +27,12 @@ namespace BattleSystem
         {
             foreach (var ally in battle.Allies)
             {
-                Context.Allies.Add(new Creature(ally));
+                Context.Allies.Add(new Creature());
                 Debug.Log($"Loaded {Context.Allies[^1].Name} with {Context.Allies[^1].Health} HP");
             }
             foreach (var enemy in battle.Enemies)
             {
-                Context.Enemies.Add(new Creature(enemy));
+                Context.Enemies.Add(new Creature());
                 Debug.Log($"Loaded {Context.Enemies[^1].Name} with {Context.Enemies[^1].Health} HP");
             }
         }

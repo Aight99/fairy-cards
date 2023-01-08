@@ -7,8 +7,8 @@ namespace BattleSystem
     {
         [SerializeField] private BattleSystem battleSystem;
         [SerializeField] private Battle battleInfo;
-        [SerializeField] private HandCardData card;
-        [SerializeField] private Attack attack;
+        // [SerializeField] private HandCardData card;
+        // [SerializeField] private Attack attack;
 
         private Context _context;
 
@@ -30,13 +30,13 @@ namespace BattleSystem
             Command
                 .CreateEmpty()
                 .AddTarget(_context.Enemies[^1])
-                .SetCardToPlay(card)
+                // .SetCardToPlay(card)
         );
 
         public void Attack() => battleSystem.ExecuteCommand(
             Command
                 .CreateEmpty()
-                .SetAttack(attack)
+                // .SetAttack(attack)
                 .SetUser(_context.Allies[^1])
                 .AddTarget(_context.Enemies[^1])
                 .SetTurnEnd()

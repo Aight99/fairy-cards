@@ -11,14 +11,15 @@ namespace BattleSystem
         public Creature()
         {
             Health = 10;
+            Name = "lorem ipsum";
         }
         
-        public Creature(GameObject cardPrefab)
-        {
-            var card = cardPrefab.GetComponent<Card>();
-            Health = card.stats.healthPoints;
-            Name = card.character.ToString();
-        }
+        // public Creature(GameObject cardPrefab)
+        // {
+            // var card = cardPrefab.GetComponent<Card>();
+            // Health = card.stats.healthPoints;
+            // Name = card.character.ToString();
+        // }
 
         public override string ToString()
         {

@@ -6,8 +6,8 @@ namespace BattleSystem
     public class Command
     {
         public bool IsEndingTurn { get; private set; }
-        public HandCardData Card { get; private set; }
-        public Attack Attack { get; private set; }
+        // public HandCardData Card { get; private set; }
+        // public Attack Attack { get; private set; }
         
         public Creature User { get; private set; }
         public List<Creature> Targets { get; private set; }
@@ -26,17 +26,17 @@ namespace BattleSystem
             return this;
         }
         
-        public Command SetCardToPlay(HandCardData card)
-        {
-            Card = card;
-            return this;
-        }
-        
-        public Command SetAttack(Attack attack)
-        {
-            Attack = attack;
-            return this;
-        }
+        // public Command SetCardToPlay(HandCardData card)
+        // {
+        //     Card = card;
+        //     return this;
+        // }
+        //
+        // public Command SetAttack(Attack attack)
+        // {
+        //     Attack = attack;
+        //     return this;
+        // }
 
         public Command SetUser(Creature user)
         {
