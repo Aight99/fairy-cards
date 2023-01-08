@@ -7,15 +7,23 @@ public class Hand : Updateble
 {
     public List<CardInHand> cardsInHand = new();
 
+    [SerializeField] private Vector3 ScaleShift;
+    [SerializeField] private Vector3 PositionShift;
 
     [SerializeField] private Transform center;
     [SerializeField] private float gap;
 
     [SerializeField] private Deck deck;
 
+    [SerializeField] private Updateble TableController;
+    [SerializeField] private EmptySpaceOnTable TableTrigger;
+
+    private Updateble currenUpdatable;
+
 
     private Vector2 cardSize;
     
+
     private void Start()
     {
         for (int i = 0; i < 5; i++)
@@ -25,10 +33,29 @@ public class Hand : Updateble
 
         cardSize = cardsInHand[0].getSize();
 
+        TableTrigger.onClick.AddListener((trigger) => currenUpdatable = TableController);
 
         RebaseCardPosition();
     }
 
+    public override void _Start()
+    {
+        Debug.Log("Hand select");
+
+        currenUpdatable = this;
+
+        //center.transform.localScale += ScaleShift;
+        center.transform.localPosition += PositionShift;
+        RebaseCardPosition();
+    }
+
+    public override void _End()
+    {
+       
+        //center.transform.localScale -= ScaleShift;
+        center.transform.localPosition -= PositionShift;
+        RebaseCardPosition();
+    }
 
     private void DrawCardFromDeck()
     {
@@ -49,7 +76,6 @@ public class Hand : Updateble
             cardsInHand[i].transform.position = startPoint + new Vector3(i * (cardSize.x + gap), 0);
         }
     }
-   
 
     public override void _Update()
     {
@@ -59,5 +85,9 @@ public class Hand : Updateble
             card._Update();
         };
 
+        TableTrigger._Update();
     }
+
+    public override Updateble GetNextUpdateble() => currenUpdatable;
+
 }

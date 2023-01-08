@@ -30,6 +30,23 @@ public class Card : Updateble
             Debug.LogError($"{this} Card object has no box collider");
     }
 
+    public override void _Start()
+    {
+        prevHitValue = false;
+
+        onCursorEnter = new UnityEvent<Card>();
+        onCursorLeft = new UnityEvent<Card>();
+        onClick = new UnityEvent<Card>();
+
+
+        boxCollider = GetComponent<BoxCollider>();
+
+        if (boxCollider == null)
+            Debug.LogError($"{this} Card object has no box collider");
+    }
+
+
+
     public override void _Update()
     {
         bool isClick = Input.GetMouseButtonDown(0);
