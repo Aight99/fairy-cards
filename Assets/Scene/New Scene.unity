@@ -631,6 +631,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentUpdateble: {fileID: 375640281}
+  EnemyController: {fileID: 2036412721}
+  TableController: {fileID: 375640281}
+  endTurnButton: {fileID: 1569048592}
 --- !u!4 &687564971
 Transform:
   m_ObjectHideFlags: 0
