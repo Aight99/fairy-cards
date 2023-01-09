@@ -2,21 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using BattleSystem;
 
 public class GameManager : MonoBehaviour
 {
 
     [SerializeField] Battle battleInfo;
-    [SerializeField] BattleSystem.BattleSystem battleSystem;
+    [SerializeField] BattleController battleController;
 
 
 
     private void Awake()
     {
-        battleSystem.LoadBattle(battleInfo);
+        battleController.LoadBattle(battleInfo);
 
-        foreach(var data in battleSystem.Context.Field.Where(i => i != null)) {
-            SpawnCreture(data.creatureData);
+        foreach(var data in battleController.Context.Field.Where(i => i != null)) {
+            SpawnCreture(data.CreatureData);
         };
     }
 

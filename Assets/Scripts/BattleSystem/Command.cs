@@ -7,17 +7,19 @@ namespace BattleSystem
     public class Command
     {
         public bool IsEndingTurn { get; private set; }
-        // public HandCardData Card { get; private set; }
-        // public Attack Attack { get; private set; }
-        
+        public HandCardData Card { get; private set; }
         public int UserIndex { get; private set; }
         public int TargetIndex { get; private set; }
+        public int MoveIndex { get; private set; }
 
         private Command()
         {
+            UserIndex = -1;
+            TargetIndex = -1;
+            MoveIndex = -1;
             IsEndingTurn = false;
         }
-        
+
         public static Command CreateEmpty() => new Command();
         public static Command EndTurnCommand() => new Command()
             .SetTurnEnd();
@@ -26,10 +28,12 @@ namespace BattleSystem
             .SetTarget(targetIndex)
             .SetTurnEnd();
 
-        public static Command MoveCommand(int card, int target) => new Command();
+        public static Command MoveCommand(int card, int target) => new Command()
+            .SetUser(card)
+            .SetMoveTarget(target);
 
-        public static Command PlayCardCommand() => new Command()
-            .SetTurnEnd();
+        public static Command PlayCardCommand(HandCardData handCard) => new Command()
+            .SetCardToPlay(handCard);
 
         public Command SetTurnEnd()
         {
@@ -37,18 +41,18 @@ namespace BattleSystem
             return this;
         }
         
-        // public Command SetCardToPlay(HandCardData card)
-        // {
-        //     Card = card;
-        //     return this;
-        // }
-        //
-        // public Command SetAttack(Attack attack)
-        // {
-        //     Attack = attack;
-        //     return this;
-        // }
+        public Command SetCardToPlay(HandCardData card)
+        {
+            Card = card;
+            return this;
+        }
 
+        public Command SetMoveTarget(int targetIndex)
+        {
+            MoveIndex = targetIndex;
+            return this;
+        }
+        
         public Command SetUser(int userIndex)
         {
             UserIndex = userIndex;

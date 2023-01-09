@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -658,7 +658,7 @@ MonoBehaviour:
   EnemyController: {fileID: 2036412721}
   HandTrigger: {fileID: 284659945}
   battleInfo: {fileID: 11400000, guid: 8590f756c4109a447968037002e6bb2d, type: 2}
-  battleSystem: {fileID: 173345247}
+  battleController: {fileID: 173345247}
 --- !u!4 &375640282
 Transform:
   m_ObjectHideFlags: 0
