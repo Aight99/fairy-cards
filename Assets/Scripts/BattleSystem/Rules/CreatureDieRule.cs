@@ -14,22 +14,16 @@ namespace BattleSystem.Rules
         
         public void ApplyRule()
         {
+            Debug.Log($"User index:  {_context.CurrentCommand.UserIndex}; target index: {_context.CurrentCommand.TargetIndex}");
 
-            Debug.Log($"target index  {_context.CurrentCommand.TargetIndex} user idnex {_context.CurrentCommand.UserIndex}");
-
-            foreach(var f in _context.Field)
+            for (int i = 0; i < _context.Field.Length; i++)
             {
-                Debug.Log(f?.ToString());
+                if (_context.Field[i]?.Health <= 0)
+                {
+                    Debug.Log($"DIE! On position {i}");
+                    _context.Field[i] = null;
+                }
             }
-
-            //for (int i = 0; i < _context.Field.Length; i++)
-            //{
-            //    if (_context.Field[i].Health <= 0)
-            //    {
-            //        Debug.Log($"DIE! On position {i}");
-            //        _context.Field[i] = null;
-            //    }
-            //}
         }
     }
 }
