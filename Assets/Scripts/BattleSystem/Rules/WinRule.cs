@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace BattleSystem.Rules
 {
@@ -20,6 +21,7 @@ namespace BattleSystem.Rules
                     return;
                 }
             }
+            Debug.Log($"<color=green>YOU WON!</color>");
             _context.ThrowWin();
         }
     }

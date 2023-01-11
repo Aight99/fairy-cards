@@ -11,6 +11,7 @@ namespace BattleSystem
         public int Health { get; set; }
         public string Name { get; set; }
         public int Shields { get; set; }
+        public bool IsAwakened { get; set; }
         public Dictionary<EffectType, int> EffectsDuration { get; private set;}
 
         public Creature()
@@ -18,6 +19,7 @@ namespace BattleSystem
             Health = 10;
             Name = "lorem ipsum";
             Shields = 0;
+            IsAwakened = false;
             EffectsDuration = new Dictionary<EffectType, int>();
         }
 
@@ -26,9 +28,13 @@ namespace BattleSystem
             Health = data.Health;
             Name = data.Name;
             Shields = 0;
+            IsAwakened = false;
+            CreatureData = data;
             EffectsDuration = new Dictionary<EffectType, int>();  
         }
 
+        public AttackData CurrentAttack => (IsAwakened) ? CreatureData.AwakenedAttack : CreatureData.NormalAttack;
+        
         public override string ToString() => $"「{Name}」: {Health} HP";
     }
 }

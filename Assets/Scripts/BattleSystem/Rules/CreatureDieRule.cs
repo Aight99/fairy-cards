@@ -20,7 +20,7 @@ namespace BattleSystem.Rules
             {
                 if (_context.Field[i]?.Health <= 0)
                 {
-                    Debug.Log($"DIE! On position {i}");
+                    Debug.Log($"<color=red>DEATH!</color> On position {i}");
                     _context.Field[i] = null;
                 }
             }
