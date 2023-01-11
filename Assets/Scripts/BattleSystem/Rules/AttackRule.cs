@@ -7,7 +7,6 @@ namespace BattleSystem.Rules
     public class AttackRule : IRule
     {
         private static readonly int[] EnemySide = {5, 6, 7, 8, 9};
-        // private static readonly int[] PlayerSide = {4, 3, 2, 1, 0};
         private static readonly int[] PlayerSide = {0, 1, 2, 3, 4};
         private readonly Context _context;
         
@@ -23,6 +22,7 @@ namespace BattleSystem.Rules
             {
                 return;
             }
+            _context.Field[command.UserIndex].AttackCount++;
             
             var attack = _context.Field[command.UserIndex].CurrentAttack;
             var targets = GetTargets(command.UserIndex, command.TargetIndex, attack.AttackType);
@@ -32,6 +32,10 @@ namespace BattleSystem.Rules
                 if (_context.Field[targetIndex] != null)
                 {
                     ApplyDamage(targetIndex, attack.Damage);
+                    if (_context.IsPlayerTurn)
+                    {
+                        _context.DamageApplyCount++;
+                    }
                 }
             }
         }

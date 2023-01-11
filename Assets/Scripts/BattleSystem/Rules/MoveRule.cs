@@ -21,6 +21,10 @@ namespace BattleSystem.Rules
                 _context.Field[command.MoveIndex] = _context.Field[command.UserIndex];
                 _context.Field[command.UserIndex] = null;
                 _context.ChangePosition(command.UserIndex, command.MoveIndex);
+                if (_context.IsPlayerTurn)
+                {
+                    _context.CreatureMoveCount++;
+                }
             }
         }
     }

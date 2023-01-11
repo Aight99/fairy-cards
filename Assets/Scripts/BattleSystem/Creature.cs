@@ -13,6 +13,7 @@ namespace BattleSystem
         public int Shields { get; set; }
         public bool IsAwakened { get; set; }
         public Dictionary<EffectType, int> EffectsDuration { get; private set;}
+        public int AttackCount { get; set; }
 
         public Creature()
         {
@@ -21,6 +22,7 @@ namespace BattleSystem
             Shields = 0;
             IsAwakened = false;
             EffectsDuration = new Dictionary<EffectType, int>();
+            AttackCount = 0;
         }
 
         public Creature(CreatureData data)
@@ -31,6 +33,7 @@ namespace BattleSystem
             IsAwakened = false;
             CreatureData = data;
             EffectsDuration = new Dictionary<EffectType, int>();  
+            AttackCount = 0;
         }
 
         public AttackData CurrentAttack => (IsAwakened) ? CreatureData.AwakenedAttack : CreatureData.NormalAttack;

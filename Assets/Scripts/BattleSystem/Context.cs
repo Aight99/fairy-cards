@@ -22,14 +22,24 @@ namespace BattleSystem
         public Context()
         {
             Field = new Creature[10];
-            MaxMana = 0;
-            CurrentMana = 0;
+            MaxMana = 3;
+            CurrentMana = 3;
+            DamageApplyCount = 0;
+            IsPlayerTurn = true;
+            TurnNumber = 1;
+            UsedManaCount = 0;
+            CreatureMoveCount = 0;
         }
-
+        
+        public bool IsPlayerTurn { get; set; }
         public Creature[] Field { get; private set; }
         public int MaxMana { get; private set; }
         public int CurrentMana { get; private set; }
         public Command CurrentCommand { get; set; }
+        public int DamageApplyCount { get; set; }
+        public int UsedManaCount { get; set; }
+        public int CreatureMoveCount { get; set; }
+        public int TurnNumber { get; set; }
 
         public void EndTurn() => PlayerTurnEnded?.Invoke();
         public void ThrowWin() => PlayerWon?.Invoke();
