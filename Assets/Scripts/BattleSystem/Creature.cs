@@ -32,11 +32,11 @@ namespace BattleSystem
         public Creature(CreatureData data, bool isPlayer)
         {
             IsPlayer = isPlayer;
+            CreatureData = data;
             Health = data.Health;
             Name = data.Name;
             Shields = 0;
             IsAwakened = false;
-            CreatureData = data;
             EffectsDuration = new Dictionary<EffectType, int>();  
             AttackCount = 0;
         }

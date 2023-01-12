@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] CardOnTable cardOnTablePrefab;
     [SerializeField] List<CreatureData> creatureData;
 
-    void Start()
+    private void Awake()
     {
         battleController.LoadBattle(battleInfo);
 
