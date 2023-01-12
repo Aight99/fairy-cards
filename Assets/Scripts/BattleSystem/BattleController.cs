@@ -8,7 +8,7 @@ namespace BattleSystem
     public class BattleController : MonoBehaviour
     {
         public static BattleController Instance;
-        
+
         private List<IRule> _rules;
 
         public Context Context { get; private set; }
@@ -16,7 +16,7 @@ namespace BattleSystem
         private void Awake()
         {
             Instance = (Instance == null) ? this : Instance;
-            
+
             Context = new Context();
             _rules = new List<IRule>()
             {
@@ -41,7 +41,7 @@ namespace BattleSystem
             foreach (var ally in battle.Allies)
             {
                 Context.Field[allySpawnOrder[spawnIndex]] = new Creature(ally, true);
-                spawnIndex++;   
+                spawnIndex++;
             }
 
             spawnIndex = 0;
@@ -66,6 +66,7 @@ namespace BattleSystem
             {
                 rule.ApplyRule();
             }
+
             PrintCurrentTable();
         }
 
@@ -76,25 +77,31 @@ namespace BattleSystem
             {
                 if (Context.Field[i] != null)
                 {
-                    side += $"<color=#f54248>[{Context.Field[i].Name}: {Context.Field[i].Health}hp]</color>\t";
+                    side += (Context.Field[i].Shields == 0)
+                        ? $"<color=#f54248>[{Context.Field[i].Name}: {Context.Field[i].Health}hp]</color>\t"
+                        : $"<color=#f54248>[{Context.Field[i].Name}: {Context.Field[i].Health}({Context.Field[i].Shields})hp]</color>\t";
                 }
                 else
                 {
                     side += "[]\t";
                 }
             }
+
             side += "\n\t\t";
             for (int i = 0; i < 5; i++)
             {
                 if (Context.Field[i] != null)
                 {
-                    side += $"<color=#f59e42>[{Context.Field[i].Name}: {Context.Field[i].Health}hp]</color>\t";
+                    side += (Context.Field[i].Shields == 0)
+                        ? $"<color=#f59e42>[{Context.Field[i].Name}: {Context.Field[i].Health}hp]</color>\t"
+                        : $"<color=#f59e42>[{Context.Field[i].Name}: {Context.Field[i].Health}({Context.Field[i].Shields})hp]</color>\t";
                 }
                 else
                 {
                     side += "[]\t";
                 }
             }
+
             Debug.Log(side);
         }
     }

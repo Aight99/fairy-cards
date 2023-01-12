@@ -33,7 +33,7 @@ namespace BattleSystem.Rules
             {
                 if (_context.Field[targetIndex] != null)
                 {
-                    ApplyDamage(targetIndex, attack.Damage);
+                    ApplyDamage(command.UserIndex, targetIndex, attack.Damage);
                 }
             }
             ApplyAdditionalEffects(targets, command.UserIndex, attack.AdditionalEffects, true);
@@ -73,6 +73,7 @@ namespace BattleSystem.Rules
             return targets;
         }
 
+        // Этот ужас можно отрефкторить красиво, но делать я этого, конечно, не буду
         private void ApplyAdditionalEffects(List<int> targets, int user, List<AdditionalEffect> effects, bool isAfterAttack)
         {
             foreach (var effect in effects)
@@ -86,31 +87,128 @@ namespace BattleSystem.Rules
                     _context.CurrentMana += effect.EffectParameter;
                     _context.ChangeMana(_context.CurrentMana);
                 }
-                if (effect.EffectType == EffectType.CardGain)
+                else if (effect.EffectType == EffectType.CardGain)
                 {
                     _context.AddCardsInHand(effect.EffectParameter);
                 }
-                if (effect.EffectType == EffectType.FreeAttack)
+                else if (effect.EffectType == EffectType.FreeAttack)
                 {
                     _context.CurrentCommand.SetTurnEnd(false);
                 }
-                if (effect.EffectType == EffectType.Move)
+                else if (effect.EffectType == EffectType.Move)
                 {
                     _context.CurrentCommand.MoveIndex = _context.CurrentCommand.UserIndex;
                 }
-                if (effect.EffectType == EffectType.Damage)
+                else if (effect.EffectType == EffectType.Damage)
                 {
                     if (effect.IsSelfTarget)
                     {
-                        ApplyDamage(user, effect.EffectParameter);
+                        ApplyDamage(user, user, effect.EffectParameter);
                     }
-                    // targets TODO
+                    else
+                    {
+                        foreach (var target in targets)
+                        {
+                            ApplyDamage(user, target, effect.EffectParameter);
+                        }
+                    }
+                }
+                else if (effect.EffectType == EffectType.Heal)
+                {
+                    if (effect.IsSelfTarget)
+                    {
+                        _context.Field[user].Health += effect.EffectParameter;
+                        _context.ChangeHealth(user, _context.Field[user].Health);
+                    }
+                    else
+                    {
+                        foreach (var target in targets)
+                        {
+                            _context.Field[target].Health += effect.EffectParameter;
+                            _context.ChangeHealth(target, _context.Field[target].Health);
+                        }
+                    }
+                }
+                else if (effect.EffectType == EffectType.Heal)
+                {
+                    if (effect.IsSelfTarget)
+                    {
+                        _context.Field[user].Health += effect.EffectParameter;
+                        _context.ChangeHealth(user, _context.Field[user].Health);
+                    }
+                    else
+                    {
+                        foreach (var target in targets)
+                        {
+                            _context.Field[target].Health += effect.EffectParameter;
+                            _context.ChangeHealth(target, _context.Field[target].Health);
+                        }
+                    }
+                }
+                else if (effect.EffectType == EffectType.Shield)
+                {
+                    if (effect.IsSelfTarget)
+                    {
+                        _context.Field[user].Shields += effect.EffectParameter;
+                        _context.ChangeShields(user, _context.Field[user].Shields);
+                    }
+                    else
+                    {
+                        foreach (var target in targets)
+                        {
+                            _context.Field[target].Shields += effect.EffectParameter;
+                            _context.ChangeShields(target, _context.Field[target].Shields);
+                        }
+                    }
+                }
+                else if (effect.EffectType == EffectType.HalfLife)
+                {
+                    if (effect.IsSelfTarget)
+                    {
+                        ApplyDamage(user, user, _context.Field[user].Health / 2);
+                    }
+                    else
+                    {
+                        foreach (var target in targets)
+                        {
+                            ApplyDamage(user, target, _context.Field[target].Health / 2);
+                        }
+                    }
+                }
+                else if (effect.EffectType == EffectType.Vampire)
+                {
+                    if (effect.IsSelfTarget)
+                    {
+                        _context.Field[user].EffectsDuration.Add(EffectType.Vampire, effect.EffectParameter);
+                    }
+                    else
+                    {
+                        foreach (var target in targets)
+                        {
+                            _context.Field[target].EffectsDuration.Add(EffectType.Vampire, effect.EffectParameter);
+                        }
+                    }
+                }
+                else if (effect.EffectType == EffectType.Silence)
+                {
+                    if (effect.IsSelfTarget)
+                    {
+                        _context.Field[user].EffectsDuration.Add(EffectType.Silence, effect.EffectParameter);
+                    }
+                    else
+                    {
+                        foreach (var target in targets)
+                        {
+                            _context.Field[target].EffectsDuration.Add(EffectType.Silence, effect.EffectParameter);
+                        }
+                    }
                 }
             }
         }
-        
-        private void ApplyDamage(int targetIndex, int damage)
+
+        private void ApplyDamage(int userIndex, int targetIndex, int damage)
         {
+            var user = _context.Field[userIndex];
             var target = _context.Field[targetIndex];
             if (damage <= 0)
             {
@@ -126,6 +224,10 @@ namespace BattleSystem.Rules
             if (damage != 0)
             {
                 target.Health -= damage;
+                if (user.EffectsDuration.ContainsKey(EffectType.Vampire))
+                {
+                    user.Health += damage;
+                }
                 _context.ChangeHealth(targetIndex, target.Health);
             }
             if (_context.IsPlayerTurn)
