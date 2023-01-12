@@ -27,6 +27,8 @@ namespace BattleSystem.Rules
             var attack = _context.Field[command.UserIndex].CurrentAttack;
             var targets = GetTargets(command.UserIndex, command.TargetIndex, attack.AttackType);
             DebugTargets(targets, attack.AttackType);
+            
+            ApplyAdditionalEffects(targets, command.UserIndex, attack.AdditionalEffects, false);
             foreach (var targetIndex in targets)
             {
                 if (_context.Field[targetIndex] != null)
@@ -38,6 +40,7 @@ namespace BattleSystem.Rules
                     }
                 }
             }
+            ApplyAdditionalEffects(targets, command.UserIndex, attack.AdditionalEffects, true);
         }
 
         private void DebugTargets(List<int> targets, AttackType type)
@@ -73,6 +76,34 @@ namespace BattleSystem.Rules
             }
             return targets;
         }
+
+        private void ApplyAdditionalEffects(List<int> targets, int user, List<AdditionalEffect> effects, bool isAfterAttack)
+        {
+            foreach (var effect in effects)
+            {
+                if (effect.IsAfterAttack != isAfterAttack)
+                {
+                    continue;
+                }
+                if (effect.EffectType == EffectType.ManaGain)
+                {
+                    _context.CurrentMana += effect.EffectParameter;
+                    _context.ChangeMana(_context.CurrentMana);
+                }
+                if (effect.EffectType == EffectType.CardGain)
+                {
+                    _context.AddCardsInHand(effect.EffectParameter);
+                }
+                if (effect.EffectType == EffectType.FreeAttack)
+                {
+                    _context.CurrentCommand.SetTurnEnd(false);
+                }
+                if (effect.EffectType == EffectType.Move)
+                {
+                    _context.CurrentCommand.MoveIndex = _context.CurrentCommand.UserIndex;
+                }
+            }
+        }
         
         private void ApplyDamage(int targetIndex, int damage)
         {
@@ -86,7 +117,7 @@ namespace BattleSystem.Rules
                 var shieldsDamage = (target.Shields >= damage) ? damage : target.Shields;
                 target.Shields -= shieldsDamage;
                 damage -= shieldsDamage;
-                _context.SetStatusEffect(targetIndex, EffectType.Shield, target.Shields);
+                _context.ChangeShields(targetIndex, target.Shields);
             }
             if (damage != 0)
             {

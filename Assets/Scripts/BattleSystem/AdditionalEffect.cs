@@ -7,7 +7,6 @@ namespace BattleSystem
         Damage,
         Heal,
         Shield,
-        Recoil,
         Vampire,
         Silence, 
         HalfLife,
@@ -15,6 +14,7 @@ namespace BattleSystem
         Endurance,
         ManaGain,
         CardGain,
+        FreeAttack,
     }
     
     [Serializable]

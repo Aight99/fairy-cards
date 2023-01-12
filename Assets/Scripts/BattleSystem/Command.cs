@@ -10,7 +10,7 @@ namespace BattleSystem
         public HandCardData Card { get; private set; }
         public int UserIndex { get; private set; }
         public int TargetIndex { get; private set; }
-        public int MoveIndex { get; private set; }
+        public int MoveIndex { get; set; }
 
         private Command()
         {
@@ -39,9 +39,9 @@ namespace BattleSystem
         public static Command PlayCardCommand(HandCardData handCard) => new Command()
             .SetCardToPlay(handCard);
 
-        public Command SetTurnEnd()
+        public Command SetTurnEnd(bool isEnd = true)
         {
-            IsEndingTurn = true;
+            IsEndingTurn = isEnd;
             return this;
         }
         

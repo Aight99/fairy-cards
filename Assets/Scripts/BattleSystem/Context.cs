@@ -11,6 +11,7 @@ namespace BattleSystem
         // 0 - 4  PlayerCard
         // 5 - 9  EnemyCard
         public static event Action<int, int> HealthChanged;
+        public static event Action<int, int> ShieldsChanged;
         public static event Action<int> CharacterAwakened;
         public static event Action<int> CardReceived;
         public static event Action<int> ManaChanged;
@@ -34,7 +35,7 @@ namespace BattleSystem
         public bool IsPlayerTurn { get; set; }
         public Creature[] Field { get; private set; }
         public int MaxMana { get; private set; }
-        public int CurrentMana { get; private set; }
+        public int CurrentMana { get; set; }
         public Command CurrentCommand { get; set; }
         public int DamageApplyCount { get; set; }
         public int UsedManaCount { get; set; }
@@ -45,6 +46,7 @@ namespace BattleSystem
         public void ThrowWin() => PlayerWon?.Invoke();
         public void ThrowLose() => PlayerLost?.Invoke();
         public void ChangeHealth(int target, int amount) => HealthChanged?.Invoke(target, amount);
+        public void ChangeShields(int target, int amount) => ShieldsChanged?.Invoke(target, amount);
         public void ChangePosition(int from, int to) => ChangeCardPosition?.Invoke(from, to);
         public void AwakeCharacter(int target) => CharacterAwakened?.Invoke(target);
         public void ChangeMana(int currentManaCount) => ManaChanged?.Invoke(currentManaCount);

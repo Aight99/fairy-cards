@@ -20,6 +20,7 @@ namespace BattleSystem
             Context = new Context();
             _rules = new List<IRule>()
             {
+                // new ManaCostRule(Context),
                 new AttackRule(Context),
                 new CardUsageRule(Context),
                 new CreatureDieRule(Context),
@@ -39,14 +40,14 @@ namespace BattleSystem
 
             foreach (var ally in battle.Allies)
             {
-                Context.Field[allySpawnOrder[spawnIndex]] = new Creature(ally);
+                Context.Field[allySpawnOrder[spawnIndex]] = new Creature(ally, true);
                 spawnIndex++;   
             }
 
             spawnIndex = 0;
             foreach (var enemy in battle.Enemies)
             {
-                Context.Field[enemySpawnOrder[spawnIndex]] = new Creature(enemy);
+                Context.Field[enemySpawnOrder[spawnIndex]] = new Creature(enemy, false);
                 spawnIndex++;
             }
 
