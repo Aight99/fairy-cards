@@ -14,6 +14,11 @@ public class CardInHand : Card
 
     public UnityEvent<Card> onPlay;
 
+    private void Start()
+    {
+        
+    }
+
     protected override void CursorEnter()
     {
         transform.localScale += ScaleShift;
