@@ -20,6 +20,10 @@ namespace BattleSystem
             IsEndingTurn = false;
         }
 
+        public bool IsAttack() => (TargetIndex != -1) && (UserIndex != -1);
+        public bool IsTargetedCard() => (TargetIndex != -1) && (Card != null);
+        public bool IsNonTargetCard() => (TargetIndex == -1) && (Card != null);
+
         public static Command CreateEmpty() => new Command();
         public static Command EndTurnCommand() => new Command()
             .SetTurnEnd();

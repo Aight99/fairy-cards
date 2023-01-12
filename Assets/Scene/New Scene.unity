@@ -439,7 +439,7 @@ MonoBehaviour:
   HandController: {fileID: 1348374494}
   EnemyController: {fileID: 2036412721}
   HandTrigger: {fileID: 284659945}
-  battleInfo: {fileID: 11400000, guid: 8590f756c4109a447968037002e6bb2d, type: 2}
+  battleInfo: {fileID: 11400000, guid: 9497709e88a99114c8a27172486edbce, type: 2}
   battleController: {fileID: 173345247}
 --- !u!4 &375640282
 Transform:

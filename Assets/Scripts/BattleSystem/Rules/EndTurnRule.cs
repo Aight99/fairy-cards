@@ -15,7 +15,13 @@ namespace BattleSystem.Rules
         {
             if (_context.CurrentCommand.IsEndingTurn)
             {
+                if (_context.IsPlayerTurn)
+                {
+                    _context.TurnNumber++;
+                }
                 _context.EndTurn();
+                // Потом поменять на свап
+                _context.IsPlayerTurn = true;
             }
         }
     }
