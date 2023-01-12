@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 173345248}
   - component: {fileID: 173345247}
   m_Layer: 0
-  m_Name: Battle System
+  m_Name: Battle Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1354,7 +1354,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1348374494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1583,11 +1583,11 @@ RectTransform:
   m_Father: {fileID: 1451629418}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -372, y: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 47, y: 0.00000047683716}
   m_SizeDelta: {x: 160, y: 30}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1569048592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1818,8 +1818,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5df756a1748455445a6ff0d8a56dcfe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  battleInfo: {fileID: 11400000, guid: 8590f756c4109a447968037002e6bb2d, type: 2}
-  battleSystem: {fileID: 173345247}
+  battleInfo: {fileID: 11400000, guid: 9497709e88a99114c8a27172486edbce, type: 2}
+  battleController: {fileID: 173345247}
   tableConroller: {fileID: 375640281}
   cardOnTablePrefab: {fileID: 5843259782687922647, guid: 1ebae8e6b54ee094bb336964ad1c8366, type: 3}
   creatureData:

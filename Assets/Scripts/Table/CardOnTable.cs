@@ -20,5 +20,10 @@ public class CardOnTable : Card
         
     }
 
+    public void SetHealth(int health)
+    {
+        cardHealth.text = health.ToString();    
+    }
+
 
 }
