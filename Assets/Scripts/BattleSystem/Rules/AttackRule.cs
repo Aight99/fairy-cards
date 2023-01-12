@@ -25,10 +25,13 @@ namespace BattleSystem.Rules
             _context.Field[command.UserIndex].AttackCount++;
             
             var attack = _context.Field[command.UserIndex].CurrentAttack;
-            var targets = GetTargets(command.UserIndex, command.TargetIndex, attack.AttackType);
+            var targets = (_context.IsPlayerTurn)
+                ? GetTargets(command.UserIndex, command.TargetIndex, attack.AttackType)
+                : _context.EnemyIntentions;
             DebugTargets(targets, attack.AttackType);
             
             _context.ApplyAdditionalEffects(targets, command.UserIndex, attack.AdditionalEffects, false);
+            _context.StartHitAnimation(command.UserIndex, command.TargetIndex);
             foreach (var targetIndex in targets)
             {
                 if (_context.Field[targetIndex] != null)
@@ -44,7 +47,7 @@ namespace BattleSystem.Rules
             Debug.Log($"<color=red>Attack!</color> {type}: [{string.Join(",", targets)}]");
         }
 
-        private List<int> GetTargets(int userIndex, int aimIndex, AttackType attackType)
+        public static List<int> GetTargets(int userIndex, int aimIndex, AttackType attackType)
         {
             // Предполагаем, что юзер и цель всегда в разных командах
             var targetSide = (EnemySide.Contains(aimIndex)) ? EnemySide : PlayerSide;

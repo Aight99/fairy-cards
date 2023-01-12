@@ -15,6 +15,8 @@ namespace BattleSystem
         public static event Action<int> CharacterAwakened;
         public static event Action<int> CardReceived;
         public static event Action<int> ManaChanged;
+        public static event Action<List<int>> EnemyIntentionsSet;
+        public static event Action<int, int> AttackPerformed;
         // Кому, какой, насколько
         public static event Action<int, EffectType, int> EffectChanged;
         // Кого, куда
@@ -44,6 +46,7 @@ namespace BattleSystem
         public int CreatureMoveCount { get; set; }
         public int TurnNumber { get; set; }
         public int NextEnemyToAttackIndex { get; set; }
+        public List<int> EnemyIntentions { get; set; }
 
         public void EndTurn() => PlayerTurnEnded?.Invoke();
         public void ThrowWin() => PlayerWon?.Invoke();
@@ -54,6 +57,8 @@ namespace BattleSystem
         public void AwakeCharacter(int target) => CharacterAwakened?.Invoke(target);
         public void ChangeMana(int currentManaCount) => ManaChanged?.Invoke(currentManaCount);
         public void AddCardsInHand(int amount) => CardReceived?.Invoke(amount);
+        public void SetEnemyIntentions(List<int> targets) => EnemyIntentionsSet?.Invoke(targets);
+        public void StartHitAnimation(int from, int to) => AttackPerformed?.Invoke(from, to);
         public void SetStatusEffect(int target, EffectType effect, int amount) => EffectChanged?.Invoke(target, effect, amount);
         
         
@@ -101,6 +106,7 @@ namespace BattleSystem
                 {
                     if (effect.IsSelfTarget)
                     {
+                        if (Field[user] == null) continue;
                         Field[user].Health += effect.EffectParameter;
                         ChangeHealth(user, Field[user].Health);
                     }
@@ -108,6 +114,7 @@ namespace BattleSystem
                     {
                         foreach (var target in targets)
                         {
+                            if (Field[target] == null) continue;
                             Field[target].Health += effect.EffectParameter;
                             ChangeHealth(target, Field[target].Health);
                         }
@@ -117,6 +124,7 @@ namespace BattleSystem
                 {
                     if (effect.IsSelfTarget)
                     {
+                        if (Field[user] == null) continue;
                         Field[user].Health += effect.EffectParameter;
                         ChangeHealth(user, Field[user].Health);
                     }
@@ -124,6 +132,7 @@ namespace BattleSystem
                     {
                         foreach (var target in targets)
                         {
+                            if (Field[target] == null) continue;
                             Field[target].Health += effect.EffectParameter;
                             ChangeHealth(target, Field[target].Health);
                         }
@@ -133,6 +142,7 @@ namespace BattleSystem
                 {
                     if (effect.IsSelfTarget)
                     {
+                        if (Field[user] == null) continue;
                         Field[user].Shields += effect.EffectParameter;
                         ChangeShields(user, Field[user].Shields);
                     }
@@ -140,6 +150,7 @@ namespace BattleSystem
                     {
                         foreach (var target in targets)
                         {
+                            if (Field[target] == null) continue;
                             Field[target].Shields += effect.EffectParameter;
                             ChangeShields(target, Field[target].Shields);
                         }
@@ -163,12 +174,14 @@ namespace BattleSystem
                 {
                     if (effect.IsSelfTarget)
                     {
+                        if (Field[user] == null) continue;
                         Field[user].EffectsDuration[effect.EffectType] += effect.EffectParameter;
                     }
                     else
                     {
                         foreach (var target in targets)
                         {
+                            if (Field[target] == null) continue;
                             Field[target].EffectsDuration[effect.EffectType] += effect.EffectParameter;
                         }
                     }
@@ -177,12 +190,14 @@ namespace BattleSystem
                 {
                     if (effect.IsSelfTarget)
                     {
+                        if (Field[user] == null) continue;
                         Field[user].EffectsDuration[effect.EffectType] += effect.EffectParameter;
                     }
                     else
                     {
                         foreach (var target in targets)
                         {
+                            if (Field[target] == null) continue;
                             Field[target].EffectsDuration[effect.EffectType] += effect.EffectParameter;
                         }
                     }
@@ -194,6 +209,10 @@ namespace BattleSystem
         {
             var user = Field[userIndex];
             var target = Field[targetIndex];
+            if (target == null)
+            {
+                return;
+            }
             if (damage <= 0)
             {
                 return;
@@ -208,7 +227,7 @@ namespace BattleSystem
             if (damage != 0)
             {
                 target.Health -= damage;
-                if (user.EffectsDuration.ContainsKey(EffectType.Vampire))
+                if (user != null && user.EffectsDuration.ContainsKey(EffectType.Vampire))
                 {
                     user.Health += damage;
                 }

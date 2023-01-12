@@ -33,7 +33,8 @@ namespace BattleSystem
 
         public static Command MoveCommand(int card, int target) => new Command()
             .SetUser(card)
-            .SetMoveTarget(target);
+            .SetMoveTarget(target)
+            .SetTurnEnd();
 
         public static Command PlayCardCommand(HandCardData handCard) => new Command()
             .SetCardToPlay(handCard);

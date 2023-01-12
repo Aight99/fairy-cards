@@ -20,23 +20,26 @@ namespace BattleSystem
             Context = new Context();
             _startTurnRules = new List<IRule>()
             {
-                // new TurnGainRule(Context),
-                // new EffectsUpdateRule(Context),
+                new TurnGainRule(Context),
+                new EffectsUpdateRule(Context),
             };
             _rules = new List<IRule>()
             {
                 new ManaCostRule(Context),
                 new AttackRule(Context),
                 new CardUsageRule(Context),
-                // new EnemyAttackRule(Context)
+                new EnemyAttackRule(Context),
                 new CreatureDieRule(Context),
                 new MoveRule(Context),
                 new AwakeningRule(Context),
-                // new EnemyTargetingRule(Context)
+                new EnemyTargetingRule(Context),
                 new WinRule(Context),
                 new LoseRule(Context),
                 new EndTurnRule(Context),
             };
+            // Костыль, не менять порядок
+            // EnemyTargetingRule, чтобы игрок сразу видел, куда прут
+            _rules[7].ApplyRule();
         }
 
         public void LoadBattle(Battle battle)
