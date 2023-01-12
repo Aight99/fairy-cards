@@ -16,6 +16,7 @@ MonoBehaviour:
   Description: "\u0421\u0435\u0440\u0434\u0446\u0435 \u0440\u0443\u0441\u0441\u043A\u043E\u0439
     \u043A\u0443\u0445\u043D\u0438"
   Image: {fileID: 21300000, guid: 8dc4d1aca3c494f4082325752aa04877, type: 3}
+  TargetType: 1
   ManaUsage: 1
   Effects:
   - EffectType: 1
@@ -23,11 +24,11 @@ MonoBehaviour:
     IsSelfTarget: 1
     IsAfterAttack: 1
   SpecialEffects:
-  - EffectType: 0
-    EffectParameter: 10
-    IsSelfTarget: 0
+  - EffectType: 7
+    EffectParameter: 1
+    IsSelfTarget: 1
     IsAfterAttack: 0
-  - EffectType: 4
-    EffectParameter: 10
+  - EffectType: 3
+    EffectParameter: 2
     IsSelfTarget: 1
     IsAfterAttack: 0

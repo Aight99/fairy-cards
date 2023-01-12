@@ -25,19 +25,21 @@ namespace BattleSystem.Rules
             _context.Field[command.UserIndex].AttackCount++;
             
             var attack = _context.Field[command.UserIndex].CurrentAttack;
-            var targets = GetTargets(command.UserIndex, command.TargetIndex, attack.AttackType);
+            var targets = (_context.IsPlayerTurn)
+                ? GetTargets(command.UserIndex, command.TargetIndex, attack.AttackType)
+                : _context.EnemyIntentions;
             DebugTargets(targets, attack.AttackType);
+            
+            _context.ApplyAdditionalEffects(targets, command.UserIndex, attack.AdditionalEffects, false);
+            _context.StartHitAnimation(command.UserIndex, command.TargetIndex);
             foreach (var targetIndex in targets)
             {
                 if (_context.Field[targetIndex] != null)
                 {
-                    ApplyDamage(targetIndex, attack.Damage);
-                    if (_context.IsPlayerTurn)
-                    {
-                        _context.DamageApplyCount++;
-                    }
+                    _context.ApplyDamage(command.UserIndex, targetIndex, attack.Damage);
                 }
             }
+            _context.ApplyAdditionalEffects(targets, command.UserIndex, attack.AdditionalEffects, true);
         }
 
         private void DebugTargets(List<int> targets, AttackType type)
@@ -45,7 +47,7 @@ namespace BattleSystem.Rules
             Debug.Log($"<color=red>Attack!</color> {type}: [{string.Join(",", targets)}]");
         }
 
-        private List<int> GetTargets(int userIndex, int aimIndex, AttackType attackType)
+        public static List<int> GetTargets(int userIndex, int aimIndex, AttackType attackType)
         {
             // Предполагаем, что юзер и цель всегда в разных командах
             var targetSide = (EnemySide.Contains(aimIndex)) ? EnemySide : PlayerSide;
@@ -72,27 +74,6 @@ namespace BattleSystem.Rules
                     break;
             }
             return targets;
-        }
-        
-        private void ApplyDamage(int targetIndex, int damage)
-        {
-            var target = _context.Field[targetIndex];
-            if (damage <= 0)
-            {
-                return;
-            }
-            if (target.Shields != 0)
-            {
-                var shieldsDamage = (target.Shields >= damage) ? damage : target.Shields;
-                target.Shields -= shieldsDamage;
-                damage -= shieldsDamage;
-                _context.SetStatusEffect(targetIndex, EffectType.Shield, target.Shields);
-            }
-            if (damage != 0)
-            {
-                target.Health -= damage;
-                _context.ChangeHealth(targetIndex, target.Health);
-            }
         }
     }
 }

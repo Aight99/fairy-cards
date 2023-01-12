@@ -10,7 +10,7 @@ namespace BattleSystem
         public HandCardData Card { get; private set; }
         public int UserIndex { get; private set; }
         public int TargetIndex { get; private set; }
-        public int MoveIndex { get; private set; }
+        public int MoveIndex { get; set; }
 
         private Command()
         {
@@ -21,8 +21,7 @@ namespace BattleSystem
         }
 
         public bool IsAttack() => (TargetIndex != -1) && (UserIndex != -1);
-        public bool IsTargetedCard() => (TargetIndex != -1) && (Card != null);
-        public bool IsNonTargetCard() => (TargetIndex == -1) && (Card != null);
+        public bool IsCard() => Card != null;
 
         public static Command CreateEmpty() => new Command();
         public static Command EndTurnCommand() => new Command()
@@ -34,14 +33,15 @@ namespace BattleSystem
 
         public static Command MoveCommand(int card, int target) => new Command()
             .SetUser(card)
-            .SetMoveTarget(target);
+            .SetMoveTarget(target)
+            .SetTurnEnd();
 
         public static Command PlayCardCommand(HandCardData handCard) => new Command()
             .SetCardToPlay(handCard);
 
-        public Command SetTurnEnd()
+        public Command SetTurnEnd(bool isEnd = true)
         {
-            IsEndingTurn = true;
+            IsEndingTurn = isEnd;
             return this;
         }
         

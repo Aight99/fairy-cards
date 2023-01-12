@@ -17,19 +17,19 @@ MonoBehaviour:
     \u0433\u043E\u043B\u043E\u0432\u0443 \u043E\u0442 \u0441\u043E\u043B\u043D\u0446\u0430
     \u0438 \u043B\u0438\u0448\u043D\u0438\u0445 \u0432\u0437\u0433\u043B\u044F\u0434\u043E\u0432"
   Image: {fileID: 21300000, guid: 2cf34b7456ccce94f80c3711dfdddfdb, type: 3}
+  TargetType: 1
   ManaUsage: 1
   Effects:
   - EffectType: 2
     EffectParameter: 5
     IsSelfTarget: 1
     IsAfterAttack: 1
-  SpecialUser: {fileID: 11400000, guid: 92272cc4934ed2a4bb39615d45048de2, type: 2}
   SpecialEffects:
   - EffectType: 2
-    EffectParameter: 5
+    EffectParameter: 10
     IsSelfTarget: 1
     IsAfterAttack: 1
-  - EffectType: 8
+  - EffectType: 7
     EffectParameter: 1
     IsSelfTarget: 1
     IsAfterAttack: 1

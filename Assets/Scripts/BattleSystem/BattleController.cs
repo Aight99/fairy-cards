@@ -8,27 +8,38 @@ namespace BattleSystem
     public class BattleController : MonoBehaviour
     {
         public static BattleController Instance;
-        
+
         private List<IRule> _rules;
+        private List<IRule> _startTurnRules;
 
         public Context Context { get; private set; }
 
         private void Awake()
         {
             Instance = (Instance == null) ? this : Instance;
-            
             Context = new Context();
+            _startTurnRules = new List<IRule>()
+            {
+                new TurnGainRule(Context),
+                new EffectsUpdateRule(Context),
+            };
             _rules = new List<IRule>()
             {
+                new ManaCostRule(Context),
                 new AttackRule(Context),
                 new CardUsageRule(Context),
+                new EnemyAttackRule(Context),
                 new CreatureDieRule(Context),
                 new MoveRule(Context),
                 new AwakeningRule(Context),
+                new EnemyTargetingRule(Context),
                 new WinRule(Context),
                 new LoseRule(Context),
                 new EndTurnRule(Context),
             };
+            // Костыль, не менять порядок
+            // EnemyTargetingRule, чтобы игрок сразу видел, куда прут
+            _rules[7].ApplyRule();
         }
 
         public void LoadBattle(Battle battle)
@@ -39,14 +50,14 @@ namespace BattleSystem
 
             foreach (var ally in battle.Allies)
             {
-                Context.Field[allySpawnOrder[spawnIndex]] = new Creature(ally);
-                spawnIndex++;   
+                Context.Field[allySpawnOrder[spawnIndex]] = new Creature(ally, true);
+                spawnIndex++;
             }
 
             spawnIndex = 0;
             foreach (var enemy in battle.Enemies)
             {
-                Context.Field[enemySpawnOrder[spawnIndex]] = new Creature(enemy);
+                Context.Field[enemySpawnOrder[spawnIndex]] = new Creature(enemy, false);
                 spawnIndex++;
             }
 
@@ -65,6 +76,7 @@ namespace BattleSystem
             {
                 rule.ApplyRule();
             }
+
             PrintCurrentTable();
         }
 
@@ -75,25 +87,31 @@ namespace BattleSystem
             {
                 if (Context.Field[i] != null)
                 {
-                    side += $"<color=#f54248>[{Context.Field[i].Name}: {Context.Field[i].Health}hp]</color>\t";
+                    side += (Context.Field[i].Shields == 0)
+                        ? $"<color=#f54248>[{Context.Field[i].Name}: {Context.Field[i].Health}hp]</color>\t"
+                        : $"<color=#f54248>[{Context.Field[i].Name}: {Context.Field[i].Health}({Context.Field[i].Shields})hp]</color>\t";
                 }
                 else
                 {
                     side += "[]\t";
                 }
             }
+
             side += "\n\t\t";
             for (int i = 0; i < 5; i++)
             {
                 if (Context.Field[i] != null)
                 {
-                    side += $"<color=#f59e42>[{Context.Field[i].Name}: {Context.Field[i].Health}hp]</color>\t";
+                    side += (Context.Field[i].Shields == 0)
+                        ? $"<color=#f59e42>[{Context.Field[i].Name}: {Context.Field[i].Health}hp]</color>\t"
+                        : $"<color=#f59e42>[{Context.Field[i].Name}: {Context.Field[i].Health}({Context.Field[i].Shields})hp]</color>\t";
                 }
                 else
                 {
                     side += "[]\t";
                 }
             }
+
             Debug.Log(side);
         }
     }
