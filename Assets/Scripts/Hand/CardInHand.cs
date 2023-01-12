@@ -10,13 +10,14 @@ public class CardInHand : Card
     [SerializeField] private Vector3 ScaleShift;
     [SerializeField] private Vector3 PositionShift;
 
+    [SerializeField] SpriteRenderer sprite;
     [SerializeField] private HandCardData data;
 
     public UnityEvent<Card> onPlay;
 
     private void Start()
     {
-        
+        sprite.sprite = data.Image;
     }
 
     protected override void CursorEnter()
