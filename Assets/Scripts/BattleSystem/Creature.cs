@@ -13,8 +13,16 @@ namespace BattleSystem
         public int Health
         {
             get => _health;
-            set => _health = (value <= 0 && EffectsDuration.ContainsKey(EffectType.Endurance)) ? 1 : value;
+            set
+            {
+                _health = (value <= 0 && EffectsDuration.ContainsKey(EffectType.Endurance)) ? 1 : value;
+                if (_health > CreatureData.Health)
+                {
+                    _health = CreatureData.Health;
+                }
+            }
         }
+
         public string Name { get; set; }
         public int Shields { get; set; }
         public bool IsAwakened { get; set; }

@@ -34,10 +34,6 @@ namespace BattleSystem.Rules
                 if (_context.Field[targetIndex] != null)
                 {
                     ApplyDamage(targetIndex, attack.Damage);
-                    if (_context.IsPlayerTurn)
-                    {
-                        _context.DamageApplyCount++;
-                    }
                 }
             }
             ApplyAdditionalEffects(targets, command.UserIndex, attack.AdditionalEffects, true);
@@ -102,6 +98,14 @@ namespace BattleSystem.Rules
                 {
                     _context.CurrentCommand.MoveIndex = _context.CurrentCommand.UserIndex;
                 }
+                if (effect.EffectType == EffectType.Damage)
+                {
+                    if (effect.IsSelfTarget)
+                    {
+                        ApplyDamage(user, effect.EffectParameter);
+                    }
+                    // targets TODO
+                }
             }
         }
         
@@ -123,6 +127,10 @@ namespace BattleSystem.Rules
             {
                 target.Health -= damage;
                 _context.ChangeHealth(targetIndex, target.Health);
+            }
+            if (_context.IsPlayerTurn)
+            {
+                _context.DamageApplyCount++;
             }
         }
     }
