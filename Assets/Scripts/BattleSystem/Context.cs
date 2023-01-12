@@ -20,6 +20,8 @@ namespace BattleSystem
         // Кого, куда
         public static event Action<int, int> ChangeCardPosition;
 
+        private int _currentMana;
+
         public Context()
         {
             Field = new Creature[10];
@@ -35,7 +37,7 @@ namespace BattleSystem
         public bool IsPlayerTurn { get; set; }
         public Creature[] Field { get; private set; }
         public int MaxMana { get; private set; }
-        public int CurrentMana { get; set; }
+        public int CurrentMana { get => _currentMana; set => MathF.Min(value, MaxMana); }
         public Command CurrentCommand { get; set; }
         public int DamageApplyCount { get; set; }
         public int UsedManaCount { get; set; }

@@ -10,22 +10,29 @@ namespace BattleSystem
         public static BattleController Instance;
 
         private List<IRule> _rules;
+        private List<IRule> _startTurnRules;
 
         public Context Context { get; private set; }
 
         private void Awake()
         {
             Instance = (Instance == null) ? this : Instance;
-
             Context = new Context();
+            _startTurnRules = new List<IRule>()
+            {
+                // new TurnGainRule(Context),
+                // new EffectsUpdateRule(Context),
+            };
             _rules = new List<IRule>()
             {
-                // new ManaCostRule(Context),
+                new ManaCostRule(Context),
                 new AttackRule(Context),
                 new CardUsageRule(Context),
+                // new EnemyAttackRule(Context)
                 new CreatureDieRule(Context),
                 new MoveRule(Context),
                 new AwakeningRule(Context),
+                // new EnemyTargetingRule(Context)
                 new WinRule(Context),
                 new LoseRule(Context),
                 new EndTurnRule(Context),
