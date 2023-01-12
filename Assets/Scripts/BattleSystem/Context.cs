@@ -6,7 +6,7 @@ namespace BattleSystem
 {
     public class Context
     {
-        public static event Action PlayerTurnEnded;
+        public static event Action TurnEnded;
         public static event Action PlayerLost;
         public static event Action PlayerWon;
         // 0 - 4  PlayerCard
@@ -49,7 +49,7 @@ namespace BattleSystem
         public int NextEnemyToAttackIndex { get; set; }
         public List<int> EnemyIntentions { get; set; }
 
-        public void EndTurn() => PlayerTurnEnded?.Invoke();
+        public void EndTurn() => TurnEnded?.Invoke();
         public void ThrowWin() => PlayerWon?.Invoke();
         public void ThrowLose() => PlayerLost?.Invoke();
         public void ChangeHealth(int target, int amount) => HealthChanged?.Invoke(target, amount);

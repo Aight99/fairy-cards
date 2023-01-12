@@ -37,6 +37,29 @@ namespace BattleSystem
                 new LoseRule(Context),
                 new EndTurnRule(Context),
             };
+            Context.TurnEnded += ChangeTurn;
+        }
+
+        private void ChangeTurn()
+        {
+            foreach (var rule in _startTurnRules)
+            {
+                rule.ApplyRule();
+            }
+            if (!Context.IsPlayerTurn)
+            {
+                Debug.Log($"<color=yellow>ENEMY TURN!</color>");
+                ExecuteCommand(Command
+                    .CreateEmpty()
+                    .SetTarget(Context.EnemyIntentions[0])
+                    .SetUser(Context.NextEnemyToAttackIndex)
+                    .SetTurnEnd()
+                    );
+            }
+            else
+            {
+                Debug.Log($"<color=yellow>PLAYER TURN!</color>");
+            }
         }
 
         private void Start()

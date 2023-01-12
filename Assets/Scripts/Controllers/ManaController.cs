@@ -30,10 +30,12 @@ public class ManaController : MonoBehaviour
     {
         for (int i = 0; i < mana; i++)
         {
+            // Debug.Log($"CAP: {manaCoins.Count}; I: {i}");
             manaCoins[i].SetActive(true);
         }
         for (int i = mana; i < 5; i++)
         {
+            // Debug.Log($"CAP: {manaCoins.Count}; I: {i}");
             manaCoins[i].SetActive(false);
         }
     }

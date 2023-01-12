@@ -139,12 +139,12 @@ public class TableConroller : Updateble
         
         if (target < 5)
         {
-            playerCards[target]?.SetHealth(amount);
+            playerCards[target % playerCards.Count]?.SetHealth(amount);
         }
 
         if (target > 5)
         {
-            enemyCards[target - 5]?.SetHealth(amount);
+            enemyCards[(target - 5) % playerCards.Count]?.SetHealth(amount);
         }
 
     }

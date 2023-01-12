@@ -2160,7 +2160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5df756a1748455445a6ff0d8a56dcfe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  battleInfo: {fileID: 11400000, guid: 93c11d5c0b4ad644ca0c937946cbe940, type: 2}
+  battleInfo: {fileID: 11400000, guid: 9497709e88a99114c8a27172486edbce, type: 2}
   battleController: {fileID: 173345247}
   tableConroller: {fileID: 375640281}
   cardOnTablePrefab: {fileID: 5843259782687922647, guid: 1ebae8e6b54ee094bb336964ad1c8366, type: 3}
