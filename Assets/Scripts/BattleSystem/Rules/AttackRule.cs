@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace BattleSystem.Rules
 {
-    public class ModifyHealthRule : IRule
+    public class AttackRule : IRule
     {
         private readonly Context _context;
         
-        public ModifyHealthRule(Context context)
+        public AttackRule(Context context)
         {
             _context = context;
         }

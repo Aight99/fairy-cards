@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using BattleSystem;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -28,6 +29,8 @@ public class CardInHand : Card
     {
         onPlay?.Invoke(this);
         Debug.Log("Card in Hand was played");
+        // TODO Set here HandCardData
+        // BattleController.Instance.ExecuteCommand(Command.PlayCardCommand());
     }
 
     protected virtual void Play()

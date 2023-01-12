@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe782c965e864712b39ae5b8c663f0cd, type: 3}
+  m_Name: FireBall
+  m_EditorClassIdentifier: 
+  Name: "\u0424\u0430\u0435\u0440\u0431\u043E\u043B"
+  Description: "\u0424\u0443\u0442\u0431\u043E\u043B, \u0431\u0430\u0441\u043A\u0435\u0442\u0431\u043E\u043B
+    \u0438 \u0438\u0445 \u043C\u0435\u043D\u0435\u0435 \u0438\u0437\u0432\u0435\u0441\u0442\u043D\u044B\u0439
+    \u0431\u0440\u0430\u0442"
+  Image: {fileID: 21300000, guid: a0a9267b99749e24ebd5dabe48ed0fb0, type: 3}
+  ManaUsage: 1
+  Effects:
+  - EffectType: 0
+    EffectParameter: 3
+    IsSelfTarget: 0
+    IsAfterAttack: 0

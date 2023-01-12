@@ -41,12 +41,12 @@ public class TableConroller : Updateble
 
 
     [SerializeField] private Battle battleInfo;
-    [SerializeField] private BattleSystem.BattleSystem battleSystem;
+    [SerializeField] private BattleController battleController;
 
 
     private void Start()
     {
-        battleSystem.LoadBattle(battleInfo);
+        battleController.LoadBattle(battleInfo);
 
         currentUpdateble = this;
 
@@ -169,7 +169,7 @@ public class TableConroller : Updateble
         Debug.Log($"Player Card {selectedPlayerCardIndex} attack enemy card {selectedEnemyCardIndex + 5}");
 
         
-        battleSystem.ExecuteCommand(Command.AttackCommand(selectedPlayerCardIndex, selectedEnemyCardIndex + 5));
+        battleController.ExecuteCommand(Command.AttackCommand(selectedPlayerCardIndex, selectedEnemyCardIndex + 5));
 
 
         RebaseCardOrder();
@@ -194,7 +194,7 @@ public class TableConroller : Updateble
 
         if (!checkEmptySpaceEnableToMove(selectedPlayerCardIndex ,  selectedeEmptySpaceIndex)) return;
 
-        battleSystem.ExecuteCommand(Command.MoveCommand(selectedPlayerCardIndex, selectedeEmptySpaceIndex));
+        battleController.ExecuteCommand(Command.MoveCommand(selectedPlayerCardIndex, selectedeEmptySpaceIndex));
 
         //var temp = playerCardsOnTable[selectedPlayerCardIndex];
         //playerCardsOnTable[selectedPlayerCardIndex] = playerCardsOnTable[selectedeEmptySpaceIndex];

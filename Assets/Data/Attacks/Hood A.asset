@@ -9,10 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9e366d0a39a5da4980667021a44d359, type: 3}
-  m_Name: Yandex
+  m_Script: {fileID: 11500000, guid: 7b76c007c08d4ca0bfd7d30759867129, type: 3}
+  m_Name: Hood A
   m_EditorClassIdentifier: 
-  Health: 12
-  Name: yandex
+  Name: 
   Description: 
-  Sprite: {fileID: 21300000, guid: fd356201ce4506440a5c4f731473532c, type: 3}
+  Damage: 7
+  ManaUsage: 2
+  AttackType: 0
+  AdditionalEffects:
+  - EffectType: 2
+    EffectParameter: 3
+    IsSelfTarget: 1
+    IsAfterAttack: 1
