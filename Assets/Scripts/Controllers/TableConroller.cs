@@ -19,6 +19,10 @@ public class TableConroller : Updateble
     public List<CardOnTable> enemyCards = new List<CardOnTable>();
     public List<CardOnTable> playerCards = new List<CardOnTable>();
 
+    public Dictionary<CreatureData , CardOnTable> enemyCardsDict = new Dictionary<CreatureData , CardOnTable>();
+    public Dictionary<CreatureData , CardOnTable> palyerCardsDict = new Dictionary<CreatureData , CardOnTable>();
+
+
     // Я почему-то не могу добавить слушателя ивенту у нового префаб, хз почему поэтому костыли 
     [SerializeField] EmptySpaceOnTable[] emptySpaces = new EmptySpaceOnTable[10];
     //[SerializeField] EmptySpaceOnTable emptySpacePrefab;
@@ -122,7 +126,21 @@ public class TableConroller : Updateble
 
     private void RebaseCardOrder()
     {
-        // сделать 
+        var field = battleSystem.Context.Field;
+
+        int usedEmptySpaces = 0;
+
+        for (int i = 0; i < 5; i++) {
+            var creatureData = field[i].creatureData;
+            
+            playerCardsOnTable[i] = creatureData ? palyerCardsDict[creatureData] : emptySpaces[usedEmptySpaces++];
+        }
+
+        for (int i = 5; i < 10; i++) {
+            var creatureData = field[i].creatureData;
+            
+            enemyCardsOnTable[i] = creatureData ? enemyCardsDict[creatureData] : emptySpaces[usedEmptySpaces++];
+        }
     }
 
     private void RebaseCardPosition()
@@ -153,7 +171,9 @@ public class TableConroller : Updateble
         
         battleController.ExecuteCommand(Command.AttackCommand(selectedPlayerCardIndex, selectedEnemyCardIndex + 5));
 
-        
+
+        RebaseCardOrder();
+        RebaseCardPosition();
         SelectedPlayerCard = null;
 
         currentUpdateble = EnemyController;
@@ -182,6 +202,7 @@ public class TableConroller : Updateble
 
         SelectedPlayerCard = null;
 
+        RebaseCardOrder();  
         RebaseCardPosition();
 
         currentUpdateble = EnemyController;
