@@ -10,6 +10,8 @@ public class CardInHand : Card
     [SerializeField] private Vector3 ScaleShift;
     [SerializeField] private Vector3 PositionShift;
 
+    [SerializeField] private HandCardData data;
+
     public UnityEvent<Card> onPlay;
 
     protected override void CursorEnter()
@@ -27,15 +29,18 @@ public class CardInHand : Card
 
     protected override void Click()
     {
-        onPlay?.Invoke(this);
-        Debug.Log("Card in Hand was played");
-        // TODO Set here HandCardData
-        // BattleController.Instance.ExecuteCommand(Command.PlayCardCommand());
+        
+        if (data.ManaUsage  <= ManaController.CurrentManaValue)
+        {
+            onPlay?.Invoke(this);
+            Play();
+        }
     }
 
     protected virtual void Play()
     {
-
+        Debug.Log($"{data.name} played");
+        BattleController.Instance.ExecuteCommand(Command.PlayCardCommand(data));
     }
 
 }
