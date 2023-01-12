@@ -11,20 +11,32 @@ public class GameManager : MonoBehaviour
     [SerializeField] BattleController battleController;
 
 
+    [SerializeField] TableConroller tableConroller;
+
     [SerializeField] CardOnTable cardOnTablePrefab;
-
-
     [SerializeField] List<CreatureData> creatureData;
 
     void Start()
     {
         battleController.LoadBattle(battleInfo);
 
-        foreach(var data in battleController.Context.Field.Where(i => i != null)) {
-            SpawnCreture(data.CreatureData);
+        //foreach(var data in battleController.Context.Field.Where(i => i != null)) {
+        //    SpawnCreture(data.CreatureData);
+        //};
+
+        foreach (var creatureData in battleController.Context.Field[0..5].Where(i => i != null).Select(i => i.CreatureData))
+        {
+            var newCard = Instantiate(cardOnTablePrefab);
+            newCard.LoadFromCreatureData(creatureData);
+
+            tableConroller.playerCards.Add(newCard);
+
+            tableConroller.palyerCardsDict[creatureData] = newCard;
         };
 
-        foreach (var creatureData in battleSystem.Context.Field[5..9].Where(i => i != null).Select(i => i.creatureData))  
+
+
+        foreach (var creatureData in battleController.Context.Field[5..10].Where(i => i != null).Select(i => i.CreatureData))  
         {
             var newCard = Instantiate(cardOnTablePrefab);
             newCard.LoadFromCreatureData(creatureData);
@@ -33,9 +45,9 @@ public class GameManager : MonoBehaviour
 
             tableConroller.enemyCardsDict[creatureData] = newCard;
         };
-
-
     }
+
+
 
 
 }

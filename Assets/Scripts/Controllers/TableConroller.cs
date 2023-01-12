@@ -76,6 +76,7 @@ public class TableConroller : Updateble
         {
             enemyCardsOnTable[i + shift] = enemyCards[i];
             enemyCardsOnTable[i + shift].onClick.AddListener(EnemyCardClick);
+            enemyCards[i].transform.SetParent(enemyCardBase);
         }
 
         for (int i = enemyCards.Count + shift; i < 5; i++)
@@ -89,18 +90,23 @@ public class TableConroller : Updateble
 
         #region Spawn Player Card
         shift = (5 - playerCards.Count) / 2;
-
+ 
         for (int i = 0; i < shift; i++)
         {
             //playerCardsOnTable[i] = Instantiate(emptySpacePrefab, playerCardBase);
+            
             playerCardsOnTable[i] = emptySpaces[useEmptySpaces++];
             playerCardsOnTable[i].onClick.AddListener(EmptyPlayerSpaceClick);
         }
 
         for (int i = 0; i < playerCards.Count; i++)
         {
+
             playerCardsOnTable[i + shift] = playerCards[i];
-            playerCardsOnTable[i + shift].onClick.AddListener(PlayerCardClick);
+
+            playerCards[i].onClick.AddListener(PlayerCardClick);
+   
+            playerCards[i].transform.SetParent(playerCardBase);
         }
 
         for (int i = playerCards.Count + shift; i < 5; i++)
@@ -113,6 +119,10 @@ public class TableConroller : Updateble
         #endregion
 
         RebaseCardPosition();
+
+
+        Context.HealthChanged += changeHealth;
+
     }
 
     public override void _Start()
@@ -123,21 +133,35 @@ public class TableConroller : Updateble
         currentUpdateble = this;
     }
 
+    public void changeHealth(int target , int amount)
+    {
+
+        if (target < 5)
+        {
+            playerCards[target].SetHealth(amount);
+        }
+
+        if (target > 5)
+        {
+            enemyCards[target - 5].SetHealth(amount);
+        }
+
+    }
 
     private void RebaseCardOrder()
     {
-        var field = battleSystem.Context.Field;
+        var field = battleController.Context.Field;
 
         int usedEmptySpaces = 0;
 
         for (int i = 0; i < 5; i++) {
-            var creatureData = field[i].creatureData;
+            var creatureData = field[i].CreatureData;
             
             playerCardsOnTable[i] = creatureData ? palyerCardsDict[creatureData] : emptySpaces[usedEmptySpaces++];
         }
 
         for (int i = 5; i < 10; i++) {
-            var creatureData = field[i].creatureData;
+            var creatureData = field[i].CreatureData;
             
             enemyCardsOnTable[i] = creatureData ? enemyCardsDict[creatureData] : emptySpaces[usedEmptySpaces++];
         }
@@ -154,6 +178,8 @@ public class TableConroller : Updateble
 
     private void PlayerCardClick(Card card)
     {
+        Debug.Log("New player card selected");  
+
         SelectedPlayerCard = card;
     }
 

@@ -13,8 +13,9 @@ public class Card : Updateble
 
     private BoxCollider boxCollider;
     private bool prevHitValue;
-    
-    public void Start()
+   
+
+    public void Awake()
     {
         prevHitValue = false;
 
@@ -36,30 +37,21 @@ public class Card : Updateble
             throw new System.Exception();
         }
 
+        Debug.Log("Create new card event");
+
         onCursorEnter = new UnityEvent<Card>();
         onCursorLeft = new UnityEvent<Card>();
         onClick = new UnityEvent<Card>();
 
 
         boxCollider = GetComponent<BoxCollider>();
-        
+
         if (boxCollider == null)
             Debug.LogError($"{this} Card object has no box collider");
     }
 
     public override void _Start()
     {
-        prevHitValue = false;
-
-        onCursorEnter = new UnityEvent<Card>();
-        onCursorLeft = new UnityEvent<Card>();
-        onClick = new UnityEvent<Card>();
-
-
-        boxCollider = GetComponent<BoxCollider>();
-
-        if (boxCollider == null)
-            Debug.LogError($"{this} Card object has no box collider");
     }
 
 
