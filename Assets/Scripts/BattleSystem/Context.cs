@@ -52,5 +52,169 @@ namespace BattleSystem
         public void ChangeMana(int currentManaCount) => ManaChanged?.Invoke(currentManaCount);
         public void AddCardsInHand(int amount) => CardReceived?.Invoke(amount);
         public void SetStatusEffect(int target, EffectType effect, int amount) => EffectChanged?.Invoke(target, effect, amount);
+        
+        
+        // Этот ужас можно отрефкторить красиво, но делать я этого, конечно, не буду
+        public void ApplyAdditionalEffects(List<int> targets, int user, List<AdditionalEffect> effects, bool isAfterAttack)
+        {
+            foreach (var effect in effects)
+            {
+                if (effect.IsAfterAttack != isAfterAttack)
+                {
+                    continue;
+                }
+                if (effect.EffectType == EffectType.ManaGain)
+                {
+                    CurrentMana += effect.EffectParameter;
+                    ChangeMana(CurrentMana);
+                }
+                else if (effect.EffectType == EffectType.CardGain)
+                {
+                    AddCardsInHand(effect.EffectParameter);
+                }
+                else if (effect.EffectType == EffectType.FreeAttack)
+                {
+                    CurrentCommand.SetTurnEnd(false);
+                }
+                else if (effect.EffectType == EffectType.Move)
+                {
+                    CurrentCommand.MoveIndex = CurrentCommand.UserIndex;
+                }
+                else if (effect.EffectType == EffectType.Damage)
+                {
+                    if (effect.IsSelfTarget)
+                    {
+                        ApplyDamage(user, user, effect.EffectParameter);
+                    }
+                    else
+                    {
+                        foreach (var target in targets)
+                        {
+                            ApplyDamage(user, target, effect.EffectParameter);
+                        }
+                    }
+                }
+                else if (effect.EffectType == EffectType.Heal)
+                {
+                    if (effect.IsSelfTarget)
+                    {
+                        Field[user].Health += effect.EffectParameter;
+                        ChangeHealth(user, Field[user].Health);
+                    }
+                    else
+                    {
+                        foreach (var target in targets)
+                        {
+                            Field[target].Health += effect.EffectParameter;
+                            ChangeHealth(target, Field[target].Health);
+                        }
+                    }
+                }
+                else if (effect.EffectType == EffectType.Heal)
+                {
+                    if (effect.IsSelfTarget)
+                    {
+                        Field[user].Health += effect.EffectParameter;
+                        ChangeHealth(user, Field[user].Health);
+                    }
+                    else
+                    {
+                        foreach (var target in targets)
+                        {
+                            Field[target].Health += effect.EffectParameter;
+                            ChangeHealth(target, Field[target].Health);
+                        }
+                    }
+                }
+                else if (effect.EffectType == EffectType.Shield)
+                {
+                    if (effect.IsSelfTarget)
+                    {
+                        Field[user].Shields += effect.EffectParameter;
+                        ChangeShields(user, Field[user].Shields);
+                    }
+                    else
+                    {
+                        foreach (var target in targets)
+                        {
+                            Field[target].Shields += effect.EffectParameter;
+                            ChangeShields(target, Field[target].Shields);
+                        }
+                    }
+                }
+                else if (effect.EffectType == EffectType.HalfLife)
+                {
+                    if (effect.IsSelfTarget)
+                    {
+                        ApplyDamage(user, user, Field[user].Health / 2);
+                    }
+                    else
+                    {
+                        foreach (var target in targets)
+                        {
+                            ApplyDamage(user, target, Field[target].Health / 2);
+                        }
+                    }
+                }
+                else if (effect.EffectType == EffectType.Vampire)
+                {
+                    if (effect.IsSelfTarget)
+                    {
+                        Field[user].EffectsDuration.Add(EffectType.Vampire, effect.EffectParameter);
+                    }
+                    else
+                    {
+                        foreach (var target in targets)
+                        {
+                            Field[target].EffectsDuration.Add(EffectType.Vampire, effect.EffectParameter);
+                        }
+                    }
+                }
+                else if (effect.EffectType == EffectType.Silence)
+                {
+                    if (effect.IsSelfTarget)
+                    {
+                        Field[user].EffectsDuration.Add(EffectType.Silence, effect.EffectParameter);
+                    }
+                    else
+                    {
+                        foreach (var target in targets)
+                        {
+                            Field[target].EffectsDuration.Add(EffectType.Silence, effect.EffectParameter);
+                        }
+                    }
+                }
+            }
+        }
+
+        public void ApplyDamage(int userIndex, int targetIndex, int damage)
+        {
+            var user = Field[userIndex];
+            var target = Field[targetIndex];
+            if (damage <= 0)
+            {
+                return;
+            }
+            if (target.Shields != 0)
+            {
+                var shieldsDamage = (target.Shields >= damage) ? damage : target.Shields;
+                target.Shields -= shieldsDamage;
+                damage -= shieldsDamage;
+                ChangeShields(targetIndex, target.Shields);
+            }
+            if (damage != 0)
+            {
+                target.Health -= damage;
+                if (user.EffectsDuration.ContainsKey(EffectType.Vampire))
+                {
+                    user.Health += damage;
+                }
+                ChangeHealth(targetIndex, target.Health);
+            }
+            if (IsPlayerTurn)
+            {
+                DamageApplyCount++;
+            }
+        }
     }
 }
