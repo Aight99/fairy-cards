@@ -38,6 +38,10 @@ namespace BattleSystem
 
         public static Command PlayCardCommand(HandCardData handCard) => new Command()
             .SetCardToPlay(handCard);
+        
+        public static Command PlayCardCommand(HandCardData handCard, int target) => new Command()
+            .SetCardToPlay(handCard)
+            .SetTarget(target);
 
         public Command SetTurnEnd(bool isEnd = true)
         {

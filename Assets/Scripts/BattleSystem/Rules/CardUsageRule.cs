@@ -40,6 +40,7 @@ namespace BattleSystem.Rules
                     }
                 }
             }
+            _context.ApplyAdditionalEffects(targets, user, effects, false);
             _context.ApplyAdditionalEffects(targets, user, effects, true);
         }
 

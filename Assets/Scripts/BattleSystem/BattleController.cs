@@ -37,6 +37,11 @@ namespace BattleSystem
                 new LoseRule(Context),
                 new EndTurnRule(Context),
             };
+        }
+
+        private void Start()
+        {
+            Context.ChangeMana(Context.CurrentMana);
             // Костыль, не менять порядок
             // EnemyTargetingRule, чтобы игрок сразу видел, куда прут
             _rules[7].ApplyRule();
