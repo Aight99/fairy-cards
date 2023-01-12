@@ -23,6 +23,7 @@ namespace BattleSystem.Rules
             _playerSide = _playerSide.OrderBy(x => Random.Range(0, 10)).ToArray();
             foreach (var angryIndex in _enemySide)
             {
+                if (_context.Field[angryIndex] == null) continue;
                 var forward = angryIndex - 5;
                 var attackType = _context.Field[angryIndex].CurrentAttack.AttackType;
                 if (attackType == AttackType.Lunge)
@@ -36,10 +37,15 @@ namespace BattleSystem.Rules
                     _context.SetEnemyIntentions(_context.EnemyIntentions);
                     return;
                 }
-                _context.NextEnemyToAttackIndex = angryIndex;
-                _context.EnemyIntentions = AttackRule.GetTargets(angryIndex, _playerSide[0], attackType);
-                _context.SetEnemyIntentions(_context.EnemyIntentions);
-                return;
+
+                foreach (var defendIndex in _playerSide)
+                {
+                    if (_context.Field[defendIndex] == null) continue;
+                    _context.NextEnemyToAttackIndex = angryIndex;
+                    _context.EnemyIntentions = AttackRule.GetTargets(angryIndex, defendIndex, attackType);
+                    _context.SetEnemyIntentions(_context.EnemyIntentions);
+                    return;
+                }
             }
         }
     }

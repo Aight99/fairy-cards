@@ -22,7 +22,11 @@ public class CardOnTable : Card
 
     public void SetHealth(int health)
     {
-        cardHealth.text = health.ToString();    
+        cardHealth.text = health.ToString();
+        if (health <= 0)
+        {
+            Destroy(this);
+        }
     }
 
 

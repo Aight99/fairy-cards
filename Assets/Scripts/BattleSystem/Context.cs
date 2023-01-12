@@ -231,6 +231,7 @@ namespace BattleSystem
                 if (user != null && user.EffectsDuration.ContainsKey(EffectType.Vampire))
                 {
                     user.Health += damage;
+                    ChangeHealth(userIndex, user.Health);
                 }
                 ChangeHealth(targetIndex, target.Health);
             }

@@ -39,14 +39,12 @@ public class TableConroller : Updateble
     [SerializeField] private EmptySpaceOnTable HandTrigger;
     private Updateble currentUpdateble;
 
-
-    [SerializeField] private Battle battleInfo;
+    
     [SerializeField] private BattleController battleController;
 
 
     private void Start()
     {
-        battleController.LoadBattle(battleInfo);
 
         currentUpdateble = this;
 
@@ -135,15 +133,18 @@ public class TableConroller : Updateble
 
     public void changeHealth(int target , int amount)
     {
-
+        Debug.Log($"TARGET = {target}");
+        Debug.Log($"PC = {playerCards.Count}");
+        Debug.Log($"EC = {enemyCards.Count}");
+        
         if (target < 5)
         {
-            playerCards[target].SetHealth(amount);
+            playerCards[target]?.SetHealth(amount);
         }
 
         if (target > 5)
         {
-            enemyCards[target - 5].SetHealth(amount);
+            enemyCards[target - 5]?.SetHealth(amount);
         }
 
     }

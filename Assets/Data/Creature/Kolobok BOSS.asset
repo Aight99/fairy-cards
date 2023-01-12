@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9e366d0a39a5da4980667021a44d359, type: 3}
+  m_Name: Kolobok BOSS
+  m_EditorClassIdentifier: 
+  Health: 45
+  Name: "\u041A\u043E\u043B\u043E\u0431\u043E\u043A 2007"
+  Description: "\u0421\u0430\u043C\u044B\u0439 \u044D\u043C\u043E \u043A\u0443\u0441\u043E\u043A
+    \u0442\u0435\u0441\u0442\u0430"
+  Sprite: {fileID: 21300000, guid: cf3675c2900931e47b9dc227b16fc818, type: 3}
+  NormalAttack: {fileID: 11400000, guid: 70bc5d2d04d1ff742a1f037115f2b064, type: 2}
+  AwakenedAttack: {fileID: 11400000, guid: a91756a789d1c554aa9337497b334acd, type: 2}
+  SignatureCard: {fileID: 11400000, guid: a5e1888904387af42acfb716cb690659, type: 2}
