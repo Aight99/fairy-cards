@@ -37,10 +37,19 @@ namespace BattleSystem
             Name = data.Name;
             Shields = 0;
             IsAwakened = false;
-            EffectsDuration = new Dictionary<EffectType, int>();  
+            EffectsDuration = new Dictionary<EffectType, int>();
+            InitEffects();
             AttackCount = 0;
         }
 
+        private void InitEffects()
+        {
+            foreach (EffectType effect in Enum.GetValues(typeof(EffectType)))
+            {
+                EffectsDuration.Add(effect, 0);
+            }
+        }
+        
         public AttackData CurrentAttack => (IsAwakened) ? CreatureData.AwakenedAttack : CreatureData.NormalAttack;
         
         public override string ToString() => (Shields > 0) ? $"「{Name}」: {Health}+{Shields} HP" : $"「{Name}」: {Health} HP";

@@ -25,7 +25,7 @@ namespace BattleSystem
         public Context()
         {
             Field = new Creature[10];
-            MaxMana = 3;
+            MaxMana = 5;
             CurrentMana = 3;
             DamageApplyCount = 0;
             IsPlayerTurn = true;
@@ -43,6 +43,7 @@ namespace BattleSystem
         public int UsedManaCount { get; set; }
         public int CreatureMoveCount { get; set; }
         public int TurnNumber { get; set; }
+        public int NextEnemyToAttackIndex { get; set; }
 
         public void EndTurn() => PlayerTurnEnded?.Invoke();
         public void ThrowWin() => PlayerWon?.Invoke();
@@ -162,13 +163,13 @@ namespace BattleSystem
                 {
                     if (effect.IsSelfTarget)
                     {
-                        Field[user].EffectsDuration.Add(EffectType.Vampire, effect.EffectParameter);
+                        Field[user].EffectsDuration[effect.EffectType] += effect.EffectParameter;
                     }
                     else
                     {
                         foreach (var target in targets)
                         {
-                            Field[target].EffectsDuration.Add(EffectType.Vampire, effect.EffectParameter);
+                            Field[target].EffectsDuration[effect.EffectType] += effect.EffectParameter;
                         }
                     }
                 }
@@ -176,13 +177,13 @@ namespace BattleSystem
                 {
                     if (effect.IsSelfTarget)
                     {
-                        Field[user].EffectsDuration.Add(EffectType.Silence, effect.EffectParameter);
+                        Field[user].EffectsDuration[effect.EffectType] += effect.EffectParameter;
                     }
                     else
                     {
                         foreach (var target in targets)
                         {
-                            Field[target].EffectsDuration.Add(EffectType.Silence, effect.EffectParameter);
+                            Field[target].EffectsDuration[effect.EffectType] += effect.EffectParameter;
                         }
                     }
                 }
