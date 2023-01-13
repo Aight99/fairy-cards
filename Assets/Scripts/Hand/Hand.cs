@@ -40,6 +40,7 @@ public class Hand : Updateble
         TableTrigger.onClick.AddListener((trigger) => currenUpdatable = TableController);
 
         RebaseCardPosition();
+        handDescription.gameObject.SetActive(false);
     }
 
     public override void _Start()

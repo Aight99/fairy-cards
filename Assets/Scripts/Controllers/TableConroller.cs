@@ -136,10 +136,6 @@ public class TableConroller : Updateble
 
     public void changeHealth(int target , int amount)
     {
-        Debug.Log($"TARGET = {target}");
-        Debug.Log($"PC = {playerCards.Count}");
-        Debug.Log($"EC = {enemyCards.Count}");
-        
         if (target < 5)
         {
             (playerCardsOnTable[target % playerCards.Count] as CardOnTable )?.SetHealth(amount);
@@ -170,12 +166,14 @@ public class TableConroller : Updateble
         int usedEmptySpaces = 0;
 
         for (int i = 0; i < 5; i++) {
+            if (field[i] == null) continue;
             var creatureData = field[i].CreatureData;
             
             playerCardsOnTable[i] = creatureData ? palyerCardsDict[creatureData] : emptySpaces[usedEmptySpaces++];
         }
 
         for (int i = 5; i < 10; i++) {
+            if (field[i] == null) continue;
             var creatureData = field[i].CreatureData;
             
             enemyCardsOnTable[i-5] = creatureData ? enemyCardsDict[creatureData] : emptySpaces[usedEmptySpaces++];

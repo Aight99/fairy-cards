@@ -19,7 +19,7 @@ namespace BattleSystem.Rules
         public void ApplyRule()
         {
             var command = _context.CurrentCommand;
-            if (command.MoveIndex != -1)
+            if (command.MoveIndex != -1 && _context.Field[command.UserIndex] != null)
             {
                 var isTargetPlayerSide = command.MoveIndex < 5;
                 if (_context.Field[command.UserIndex].IsPlayer != isTargetPlayerSide)

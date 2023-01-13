@@ -18,6 +18,7 @@ namespace BattleSystem.Rules
             for (int i = borders.Item1; i < borders.Item2; i++)
             {
                 var creature = _context.Field[i];
+                if (creature == null) continue;
                 if (creature.Shields > 0)
                 {
                     creature.Shields = 0;
