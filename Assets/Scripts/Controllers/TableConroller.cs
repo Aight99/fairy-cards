@@ -152,11 +152,11 @@ public class TableConroller : Updateble
     {
         Debug.Log($"{index} attack {target}");
         var seq = DOTween.Sequence();
-        var originalPos = playerCardsOnTable[index].transform.position;    
-        seq.Append(playerCardsOnTable[index].transform.DOMove(enemyCardsOnTable[target-5].transform.position, (float)0.5) );    
-        seq.Append(playerCardsOnTable[index].transform.DOMove(originalPos, (float)0.5) );
-        
-
+        var card = (index < 5) ? playerCardsOnTable[index] : enemyCardsOnTable[index - 5];
+        var targetCard = (target < 5) ? playerCardsOnTable[target] : enemyCardsOnTable[target - 5];
+        var originalPos = card.transform.position;    
+        seq.Append(card.transform.DOMove(targetCard.transform.position, (float)0.5) );    
+        seq.Append(card.transform.DOMove(originalPos, (float)0.5) );
     }
 
     private void RebaseCardOrder()

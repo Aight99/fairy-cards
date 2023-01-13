@@ -20,8 +20,7 @@ namespace BattleSystem.Rules
                     _context.TurnNumber++;
                 }
                 _context.EndTurn();
-                // Потом поменять на свап
-                _context.IsPlayerTurn = true;
+                _context.IsPlayerTurn = !_context.IsPlayerTurn;
             }
         }
     }

@@ -73,6 +73,11 @@ namespace BattleSystem
             _rules[7].ApplyRule();
         }
 
+        public void EndTurn()
+        {
+            ExecuteCommand(Command.EndTurnCommand());
+        }
+
         public void LoadBattle(Battle battle)
         {
             int[] allySpawnOrder = {2, 1, 3, 0, 4};
