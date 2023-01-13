@@ -40,7 +40,7 @@ namespace BattleSystem
         public bool IsPlayerTurn { get; set; }
         public Creature[] Field { get; private set; }
         public int MaxMana { get; private set; }
-        public int CurrentMana { get => _currentMana; set => _currentMana = (int)MathF.Min(value, MaxMana); }
+        public int CurrentMana { get => _currentMana; set => _currentMana = (int)MathF.Min( Mathf.Max(value, 0), MaxMana); }
         public Command CurrentCommand { get; set; }
         public int DamageApplyCount { get; set; }
         public int UsedManaCount { get; set; }

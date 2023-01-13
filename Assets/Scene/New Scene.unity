@@ -302,7 +302,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &148898062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -486,6 +486,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ead05c3385141dda328492283aefa64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  randomBattles:
+  - {fileID: 11400000, guid: 9e1b6b969fc8fde42bc5d783f69a5173, type: 2}
+  - {fileID: 11400000, guid: 4465bb36e9c9af349836c4b356471e97, type: 2}
+  - {fileID: 11400000, guid: a6055949c4168c641b0178945a7dd82f, type: 2}
+  - {fileID: 11400000, guid: 02918de94f0e245409f0c7941b0ba73b, type: 2}
+  - {fileID: 11400000, guid: 8d1829d622b28164baab39c09017a384, type: 2}
 --- !u!4 &173345248
 Transform:
   m_ObjectHideFlags: 0

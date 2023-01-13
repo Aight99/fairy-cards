@@ -16,6 +16,6 @@ MonoBehaviour:
   Name: "\u0413\u0435\u043D\u0437\u0435\u043B\u044C"
   Description: Prepare for trouble!
   Sprite: {fileID: 21300000, guid: debb20e93ae56634da02c7348f5ac1bf, type: 3}
-  NormalAttack: {fileID: 11400000, guid: 70bc5d2d04d1ff742a1f037115f2b064, type: 2}
-  AwakenedAttack: {fileID: 11400000, guid: a91756a789d1c554aa9337497b334acd, type: 2}
+  NormalAttack: {fileID: 11400000, guid: 62bf43d04c0b5cd45bb15d6ef3af1502, type: 2}
+  AwakenedAttack: {fileID: 11400000, guid: 1d8f6f904dd8b2a43a445d03c0f2929f, type: 2}
   SignatureCard: {fileID: 11400000, guid: 8919f76501bf47a4f8c9e344ff6249c1, type: 2}

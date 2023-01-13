@@ -18,8 +18,9 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        battleController.LoadBattle(battleInfo);
-
+        // battleController.LoadBattle(battleInfo);
+        battleController.LoadRandomBattle();
+        
         //foreach(var data in battleController.Context.Field.Where(i => i != null)) {
         //    SpawnCreture(data.CreatureData);
         //};

@@ -16,6 +16,6 @@ MonoBehaviour:
   Name: "\u0421\u0443\u043F\u0435\u0440 \u041A\u043E\u0449\u0435\u0439"
   Description: "\u0414\u0435\u0434 \u0430\u043D\u0434\u0435\u0434"
   Sprite: {fileID: 21300000, guid: c1ce22f91c4435b4697950a9aef6997b, type: 3}
-  NormalAttack: {fileID: 11400000, guid: 70bc5d2d04d1ff742a1f037115f2b064, type: 2}
-  AwakenedAttack: {fileID: 11400000, guid: a91756a789d1c554aa9337497b334acd, type: 2}
+  NormalAttack: {fileID: 11400000, guid: 0c1f27575f7d05240aa1b1ed5524909b, type: 2}
+  AwakenedAttack: {fileID: 11400000, guid: 0c1f27575f7d05240aa1b1ed5524909b, type: 2}
   SignatureCard: {fileID: 11400000, guid: ea340e54c1ebbf740bceb52b02f81ea8, type: 2}

@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using BattleSystem.Rules;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace BattleSystem
 {
     public class BattleController : MonoBehaviour
     {
+        [SerializeField] private List<Battle> randomBattles;
+
         public static BattleController Instance;
 
         private List<IRule> _rules;
@@ -72,6 +75,29 @@ namespace BattleSystem
 
         public void LoadBattle(Battle battle)
         {
+            int[] allySpawnOrder = {2, 1, 3, 0, 4};
+            int[] enemySpawnOrder = {7, 6, 8, 5, 9};
+            var spawnIndex = 0;
+
+            foreach (var ally in battle.Allies)
+            {
+                Context.Field[allySpawnOrder[spawnIndex]] = new Creature(ally, true);
+                spawnIndex++;
+            }
+
+            spawnIndex = 0;
+            foreach (var enemy in battle.Enemies)
+            {
+                Context.Field[enemySpawnOrder[spawnIndex]] = new Creature(enemy, false);
+                spawnIndex++;
+            }
+
+            PrintCurrentTable();
+        }
+        
+        public void LoadRandomBattle()
+        {
+            var battle = randomBattles[Random.Range(0, randomBattles.Count)];
             int[] allySpawnOrder = {2, 1, 3, 0, 4};
             int[] enemySpawnOrder = {7, 6, 8, 5, 9};
             var spawnIndex = 0;
