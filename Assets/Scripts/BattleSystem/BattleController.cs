@@ -122,6 +122,15 @@ namespace BattleSystem
         {
             Context.CurrentCommand = command;
             UpdateRules();
+            
+            // Костыль
+            for (int i = 0; i < 10; i++)
+            {
+                if (Context.Field[i] != null)
+                {
+                    Context.ChangeHealth(i, Context.Field[i].Health);
+                }
+            }
         }
 
         private void UpdateRules()
