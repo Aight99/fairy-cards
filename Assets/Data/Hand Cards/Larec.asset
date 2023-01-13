@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe782c965e864712b39ae5b8c663f0cd, type: 3}
-  m_Name: FireBall
+  m_Name: Larec
   m_EditorClassIdentifier: 
   Name: "\u0424\u0430\u0435\u0440\u0431\u043E\u043B"
-  EffectDescription: "3 \u0443\u0440\u043E\u043D\u0430"
+  EffectDescription: "\u0414\u0430\u0451\u0442 2 \u043A\u0430\u0440\u0442\u044B"
   Description: "\u0424\u0443\u0442\u0431\u043E\u043B, \u0431\u0430\u0441\u043A\u0435\u0442\u0431\u043E\u043B
     \u0438 \u0438\u0445 \u043C\u0435\u043D\u0435\u0435 \u0438\u0437\u0432\u0435\u0441\u0442\u043D\u044B\u0439
     \u0431\u0440\u0430\u0442"
-  Image: {fileID: 21300000, guid: 96db50178d9183346a37fe94731b9424, type: 3}
+  Image: {fileID: 21300000, guid: 9f50e485b8110e74f870c0f228f2e73b, type: 3}
   TargetType: 1
   ManaUsage: 1
   Effects:
-  - EffectType: 0
-    EffectParameter: 3
+  - EffectType: 9
+    EffectParameter: 2
     IsSelfTarget: 0
     IsAfterAttack: 0

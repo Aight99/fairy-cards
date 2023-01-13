@@ -10,18 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe782c965e864712b39ae5b8c663f0cd, type: 3}
-  m_Name: FireBall
+  m_Name: Book
   m_EditorClassIdentifier: 
   Name: "\u0424\u0430\u0435\u0440\u0431\u043E\u043B"
-  EffectDescription: "3 \u0443\u0440\u043E\u043D\u0430"
+  EffectDescription: "\u0414\u0430\u0451\u0442 \u043E\u0434\u043D\u0443 \u0437\u0430\u043B\u043E\u0442\u0443\u044E
+    \u043C\u043E\u043D\u0435\u0442\u0443"
   Description: "\u0424\u0443\u0442\u0431\u043E\u043B, \u0431\u0430\u0441\u043A\u0435\u0442\u0431\u043E\u043B
     \u0438 \u0438\u0445 \u043C\u0435\u043D\u0435\u0435 \u0438\u0437\u0432\u0435\u0441\u0442\u043D\u044B\u0439
     \u0431\u0440\u0430\u0442"
-  Image: {fileID: 21300000, guid: 96db50178d9183346a37fe94731b9424, type: 3}
+  Image: {fileID: 21300000, guid: bfc3a815ab0173a48b7a34485583abc7, type: 3}
   TargetType: 1
   ManaUsage: 1
   Effects:
-  - EffectType: 0
-    EffectParameter: 3
+  - EffectType: 8
+    EffectParameter: 1
     IsSelfTarget: 0
     IsAfterAttack: 0

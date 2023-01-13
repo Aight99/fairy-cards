@@ -39,6 +39,8 @@ namespace BattleSystem.Rules
             _awakeningPredicates.Add("Русалочка", (i) => _context.DamageApplyCount >= 10);
             _awakeningPredicates.Add("Красная Шапочка", (i) => _context.Field[i].AttackCount >= 3);
             _awakeningPredicates.Add("Снежная Королева", (i) => _context.Field[i].Health <= _context.Field[i].CreatureData.Health / 2);
+            _awakeningPredicates.Add("Супер Кощей", (i) => false);
+            _awakeningPredicates.Add("Колобок 2007", (i) => false);
         }
     }
 }
