@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BattleSystem;
+using DG.Tweening;
 
 public class TableConroller : Updateble
 {
@@ -121,6 +122,8 @@ public class TableConroller : Updateble
 
         Context.HealthChanged += changeHealth;
 
+        Context.AttackPerformed += AnimateAttack;
+
     }
 
     public override void _Start()
@@ -139,13 +142,24 @@ public class TableConroller : Updateble
         
         if (target < 5)
         {
-            playerCards[target % playerCards.Count]?.SetHealth(amount);
+            (playerCardsOnTable[target % playerCards.Count] as CardOnTable )?.SetHealth(amount);
         }
 
         if (target > 5)
         {
-            enemyCards[(target - 5) % playerCards.Count]?.SetHealth(amount);
+            (enemyCardsOnTable[(target - 5) % playerCards.Count] as CardOnTable)?.SetHealth(amount);
         }
+
+    }
+
+    public void AnimateAttack(int index , int target)
+    {
+        Debug.Log($"{index} attack {target}");
+        var seq = DOTween.Sequence();
+        var originalPos = playerCardsOnTable[index].transform.position;    
+        seq.Append(playerCardsOnTable[index].transform.DOMove(enemyCardsOnTable[target-5].transform.position, (float)0.5) );    
+        seq.Append(playerCardsOnTable[index].transform.DOMove(originalPos, (float)0.5) );
+        
 
     }
 
@@ -164,7 +178,7 @@ public class TableConroller : Updateble
         for (int i = 5; i < 10; i++) {
             var creatureData = field[i].CreatureData;
             
-            enemyCardsOnTable[i] = creatureData ? enemyCardsDict[creatureData] : emptySpaces[usedEmptySpaces++];
+            enemyCardsOnTable[i-5] = creatureData ? enemyCardsDict[creatureData] : emptySpaces[usedEmptySpaces++];
         }
     }
 

@@ -11,7 +11,7 @@ public class CardInHand : Card
     [SerializeField] private Vector3 PositionShift;
 
     [SerializeField] SpriteRenderer sprite;
-    [SerializeField] private HandCardData data;
+    [SerializeField] public HandCardData data;
 
     public UnityEvent<Card> onPlay;
 

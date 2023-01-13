@@ -13,6 +13,7 @@ public enum CardTargetType
 public class HandCardData : ScriptableObject
 {
     public string Name;
+    public string EffectDescription; // Нормальное описанеи эфекта
     public string Description;
     public Sprite Image;
     public CardTargetType TargetType;

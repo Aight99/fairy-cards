@@ -18,6 +18,10 @@ public class Hand : Updateble
     [SerializeField] private Updateble TableController;
     [SerializeField] private EmptySpaceOnTable TableTrigger;
 
+
+    [SerializeField] private CardInHandDescription handDescription;
+
+
     private Updateble currenUpdatable;
 
 
@@ -41,6 +45,7 @@ public class Hand : Updateble
     public override void _Start()
     {
         Debug.Log("Hand select");
+        handDescription.gameObject.SetActive(true);
 
         currenUpdatable = this;
 
@@ -52,6 +57,8 @@ public class Hand : Updateble
     public override void _End()
     {
        
+        handDescription.gameObject.SetActive(false);
+
         //center.transform.localScale -= ScaleShift;
         center.transform.localPosition -= PositionShift;
         RebaseCardPosition();

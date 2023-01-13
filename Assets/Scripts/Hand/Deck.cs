@@ -11,6 +11,8 @@ public class Deck : MonoBehaviour
     [SerializeField] private Transform _drawPoint;
     [SerializeField] private Transform _discardPoint;
 
+    [SerializeField] private CardInHandDescription handDescription;
+
     private void Start()
     {
         if (_draw == null)
@@ -18,9 +20,12 @@ public class Deck : MonoBehaviour
 
         _discard = new List<CardInHand>();
 
-        foreach(var card in _draw)
-            card.onPlay.AddListener(DiscardCard); 
-    }
+        foreach (var card in _draw)
+        {
+            card.onPlay.AddListener(DiscardCard);
+            card.onCursorEnter.AddListener((card) => handDescription.DisplayCardDesctiption((card as CardInHand).data));
+        }
+     }
 
     private void Shuffle() => _draw.OrderBy(card => Random.value);
 
